@@ -10,19 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440a3317f955e3f41ad17b738cb316f5, type: 3}
-  m_Name: Wave_1
+  m_Name: New Wave
   m_EditorClassIdentifier: 
   steps:
-  - timingData:
-      timeUntilNextStep: 1
-      minSpacing: 1
-      maxSpacing: 1
-      waitUntilKill: 0
-    enemyData:
-      id: 0
-      maxNumberOfEnemies: 3
-      minNumberOfEnemies: 3
-    skipChance: 0
   - timingData:
       timeUntilNextStep: 0
       minSpacing: 1
@@ -30,6 +20,6 @@ MonoBehaviour:
       waitUntilKill: 0
     enemyData:
       id: 0
-      maxNumberOfEnemies: 3
-      minNumberOfEnemies: 3
+      maxNumberOfEnemies: 1
+      minNumberOfEnemies: 1
     skipChance: 0

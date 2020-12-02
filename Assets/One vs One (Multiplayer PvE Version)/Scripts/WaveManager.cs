@@ -102,17 +102,19 @@ namespace xtilly5000.Prototypes.WaveManager
         public IEnumerator SpawnWave(int waveNumber)
         {
             // Check to see if the wave exists. If it doesn't, then don't try and spawn the wave only to fail miserably.
-            if (waves.Count < waveNumber)
+            if (waves.Count - 1 < waveNumber)
             {
-                Debug.LogError("Wave does not exist!");
+                Debug.LogWarning("Wave does not exist! Could not spawn wave.");
                 yield break;
             }
+            else
+            {
+                // Start the Coroutine that will process the wave.
+                yield return StartCoroutine(ProcessWave(waves[waveNumber]));
 
-            // Start the Coroutine that will process the wave.
-            yield return StartCoroutine(ProcessWave(waves[waveNumber]));
-
-            // Call the proper event for beating a wave.
-            OnWaveKilled?.Invoke(waves[waveNumber]);
+                // Call the proper event for beating a wave.
+                OnWaveKilled?.Invoke(waves[waveNumber]);
+            }
         }
         #endregion
 

@@ -54,10 +54,11 @@ namespace xtilly5000.Prototypes.WaveManager
         private void Update()
         {
             // Constantly count down the time left until the next wave, unless the countdown timer is paused.
-            if(timeLeft > 0f && pause == false && waveKilled == true)
+            if (timeLeft > 0f && pause == false && waveKilled == true)
             {
                 timeLeft -= 1 * Time.deltaTime;
-            } else if(pause == false && waveKilled == true)
+            }
+            else if (pause == false && waveKilled == true)
             {
                 // Time ran out, so we want to spawn the next wave.
                 timeLeft = 0f;
