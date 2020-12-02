@@ -12,7 +12,7 @@ namespace xtilly5000.Prototypes.WaveManager
     /// WaveSpawnerTest class is used for testing the WaveManager.
     /// It can be modified to serve a wide variety of purposes.
     /// </summary>
-    public class WaveSpawnerTest : MonoBehaviour
+    public class WaveStartManager : MonoBehaviour
     {
         #region Variables
         // Spawn the enemies with the proper location and rotation.

@@ -15,21 +15,21 @@ MonoBehaviour:
   steps:
   - timingData:
       timeUntilNextStep: 1
-      minSpacing: 0.5
-      maxSpacing: 2
-      waitUntilKill: 1
+      minSpacing: 1
+      maxSpacing: 1
+      waitUntilKill: 0
     enemyData:
-      enemy: 0
-      maxNumberOfEnemies: 2
+      id: 0
+      maxNumberOfEnemies: 3
       minNumberOfEnemies: 3
     skipChance: 0
   - timingData:
       timeUntilNextStep: 0
-      minSpacing: 0.5
-      maxSpacing: 2
+      minSpacing: 1
+      maxSpacing: 1
       waitUntilKill: 0
     enemyData:
-      enemy: 0
+      id: 0
       maxNumberOfEnemies: 3
-      minNumberOfEnemies: 4
+      minNumberOfEnemies: 3
     skipChance: 0
