@@ -5,9 +5,9 @@ using xtilly5000.Prototypes.WaveManager;
 
 public class WaveStartManager : MonoBehaviour
 {
-    
+    int waveCount;
     void Start()
     {
-        WaveManager.Instance.SpawnWave(0);
+        StartCoroutine(WaveManager.Instance.SpawnWave(0));
     }
 }

@@ -3836,8 +3836,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 517504231}
-  - component: {fileID: 517504230}
   - component: {fileID: 517504232}
+  - component: {fileID: 517504230}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -3854,13 +3854,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 517504229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b6ffa18af48b145b4012bbc6a10b82, type: 3}
+  m_Script: {fileID: 11500000, guid: e10cf7743704b004495d76bac3773d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 8abaf042b0da7c4449dd1cad829d0a3e, type: 2}
+  - {fileID: 11400000, guid: bea6d21fb7084ed4d8893a021009d7c2, type: 2}
   prefabs:
-  - {fileID: 179992273901902789, guid: 40fb6df684a0d7b4db17e31472284424, type: 3}
+  - {fileID: 4914906735501121381, guid: 79a3c00e129080947b695b8f6140e1c4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &517504231
 Transform:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ namespace xtilly5000.Prototypes.WaveManager
     /// <summary>
     /// This class provides the basic data structure for creating waves.
     /// </summary>
-    [CreateAssetMenu(fileName = "Wave", menuName = "Wave Manager/Wave")]
+    [CreateAssetMenu(fileName = "New Wave", menuName = "Wave Manager/New Wave")]
     public class Wave : ScriptableObject
     {
         #region Variables
@@ -39,9 +39,13 @@ namespace xtilly5000.Prototypes.WaveManager
             [Tooltip("How many seconds until the next step starts.")]
             public float timeUntilNextStep;
 
-            // The amount of seconds in betweeen spawned enemies.
-            [Tooltip("The amount of seconds in betweeen spawned enemies.")]
-            public float spacing;
+            // The minimum amount of spacing between enemies in seconds.
+            [Tooltip("The minimum amount of spacing between enemies in seconds.")]
+            public float minSpacing;
+
+            // The maximum amount of spacing between enemies in seconds.
+            [Tooltip("The maximum amount of spacing between enemies in seconds.")]
+            public float maxSpacing;
 
             // Do we want to wait until the enemies are killed before moving onto the next step?
             [Tooltip("Do we want to wait until the enemies are killed before moving onto the next step?")]
@@ -55,7 +59,7 @@ namespace xtilly5000.Prototypes.WaveManager
         {
             // The type of enemy that we want to spawn.
             [Tooltip("The type of enemy that we want to spawn.")]
-            public EnemyTypes enemy;
+            public EnemyType enemy;
 
             // The maximum number of enemies we want to spawn in this step.
             [Tooltip("The maximum number of enemies we want to spawn in this step.")]
@@ -77,7 +81,7 @@ namespace xtilly5000.Prototypes.WaveManager
         public StepEnemyData enemyData;
 
         // The chance that this step will be skipped entirely as a percentage.
-        [Tooltip("// The chance that this step will be skipped entirely as a percentage.")]
+        [Tooltip("The chance that this step will be skipped entirely as a percentage.")]
         public int skipChance;
         #endregion
     }
