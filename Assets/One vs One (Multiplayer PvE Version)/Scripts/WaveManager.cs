@@ -247,9 +247,9 @@ namespace xtilly5000.Prototypes.WaveManager
             // Spawn the enemy and save a reference to it for later manipulation by functions subscribed to the event.
             WaveEnemy enemy = new WaveEnemy
             {
-                obj = GameObject.Instantiate(prefabs[(int)type])
+                obj = GameObject.Instantiate(prefabs[(int)type], transform.position, Quaternion.identity)
             };
-
+            
             // Invoke the proper event for spawning an enemy.
             OnSpawnEnemy?.Invoke(enemy);
 

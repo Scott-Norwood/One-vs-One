@@ -3196,6 +3196,7 @@ GameObject:
   - component: {fileID: 4914906735501121366}
   - component: {fileID: 4914906735501121376}
   - component: {fileID: 1649022929}
+  - component: {fileID: -3709458638091461984}
   m_Layer: 13
   m_Name: SM_Chr_Punk_Female_01 (AI)
   m_TagString: Untagged
@@ -3211,7 +3212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4914906735501121381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.57, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2624474188725679284}
@@ -3376,8 +3377,8 @@ MonoBehaviour:
   DetachmentMethod: 0
   SafeSetTransform: 0
   StandingOn: {fileID: 0}
-  NumberOfHorizontalRays: 8
-  NumberOfVerticalRays: 8
+  NumberOfHorizontalRays: 5
+  NumberOfVerticalRays: 5
   RayOffset: 0.05
   CrouchedRaycastLengthMultiplier: 1
   CastRaysOnBothSides: 0
@@ -3452,12 +3453,12 @@ MonoBehaviour:
   AbilityPermitted: 1
   BlockingMovementStates: 
   BlockingConditionStates: 
-  WalkSpeed: 1
+  WalkSpeed: 2
   MovementSpeedMultiplier: 1
   PushSpeedMultiplier: 1
   StateSpeedMultiplier: 1
   FlipCharacterToFaceDirection: 1
-  ReadInput: 1
+  ReadInput: 0
   InstantAcceleration: 0
   InputThreshold: 0.1
   AirControl: 1
@@ -3507,7 +3508,7 @@ MonoBehaviour:
   TargetLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  DamageCaused: 5
+  DamageCaused: 2
   DamageCausedKnockbackType: 0
   DamageCausedKnockbackDirection: 1
   DamageCausedKnockbackForce: {x: 10, y: 2}
@@ -3523,6 +3524,31 @@ MonoBehaviour:
   HitNonDamageableFeedback: {fileID: 0}
   FreezeFramesOnHitDuration: 0
   Owner: {fileID: 0}
+--- !u!114 &-3709458638091461984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4914906735501121381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c732375c7af5d2469f883db01407d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityStartFeedbacks: {fileID: 0}
+  AbilityStopFeedbacks: {fileID: 0}
+  AbilityPermitted: 1
+  BlockingMovementStates: 
+  BlockingConditionStates: 
+  OnStairs: 0
+  StairsBelow: 0
+  StairsAhead: 0
+  StairsAheadDetectionRaycastOrigin: {x: -0.75, y: 0, z: 0}
+  StairsAheadDetectionRaycastLength: 2
+  StairsBelowDetectionRaycastOrigin: {x: -0.2, y: 0, z: 0}
+  StairsBelowDetectionRaycastLength: 0.25
+  StairsBelowLockTime: 0.2
 --- !u!1 &4914918142885943741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6417,12 +6443,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: a5d9e5e9c928af7469765bb36908543d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 720442d4dd381894b83efa1d1068d5e7, type: 3}
---- !u!1 &6429070341012566669 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1017123011376438, guid: 720442d4dd381894b83efa1d1068d5e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6429794985339815867}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6428014767297686383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4465285574356180, guid: 720442d4dd381894b83efa1d1068d5e7,
@@ -6432,6 +6452,12 @@ Transform:
 --- !u!95 &6371151559787405823 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95095586088904260, guid: 720442d4dd381894b83efa1d1068d5e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6429794985339815867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6429070341012566669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1017123011376438, guid: 720442d4dd381894b83efa1d1068d5e7,
     type: 3}
   m_PrefabInstance: {fileID: 6429794985339815867}
   m_PrefabAsset: {fileID: 0}
