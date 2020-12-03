@@ -3196,7 +3196,6 @@ GameObject:
   - component: {fileID: 4914906735501121366}
   - component: {fileID: 4914906735501121376}
   - component: {fileID: 1649022929}
-  - component: {fileID: -3709458638091461984}
   m_Layer: 13
   m_Name: Walker_Zombie
   m_TagString: Untagged
@@ -3216,7 +3215,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2624474188725679284}
-  - {fileID: 2406559557334287390}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3418,7 +3416,7 @@ MonoBehaviour:
   VibrateOnDeath: 0
   RespawnAtInitialLocation: 0
   ApplyDeathForce: 0
-  DeathForce: {x: 0, y: 10}
+  DeathForce: {x: 0, y: 0}
   ResetForcesOnDeath: 0
 --- !u!114 &4914906735501121367
 MonoBehaviour:
@@ -3433,9 +3431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Top: 1
-  Bottom: 1
-  Left: 1
-  Right: 1
+  Bottom: 2
+  Left: 2
+  Right: 2
 --- !u!114 &4914906735501121366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3524,31 +3522,6 @@ MonoBehaviour:
   HitNonDamageableFeedback: {fileID: 0}
   FreezeFramesOnHitDuration: 0
   Owner: {fileID: 0}
---- !u!114 &-3709458638091461984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4914906735501121381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c732375c7af5d2469f883db01407d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityStartFeedbacks: {fileID: 0}
-  AbilityStopFeedbacks: {fileID: 0}
-  AbilityPermitted: 1
-  BlockingMovementStates: 
-  BlockingConditionStates: 
-  OnStairs: 0
-  StairsBelow: 0
-  StairsAhead: 0
-  StairsAheadDetectionRaycastOrigin: {x: -0.75, y: 0, z: 0}
-  StairsAheadDetectionRaycastLength: 2
-  StairsBelowDetectionRaycastOrigin: {x: -0.2, y: 0, z: 0}
-  StairsBelowDetectionRaycastLength: 0.25
-  StairsBelowLockTime: 0.2
 --- !u!1 &4914918142885943741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6288,99 +6261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e070f8d39696f4ea2d559622f8babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6834912281694137436
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2406559557334287390}
-  - component: {fileID: 3749275123581559949}
-  - component: {fileID: 5596498170223978352}
-  m_Layer: 13
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2406559557334287390
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6834912281694137436}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4917576795329622555}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3749275123581559949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6834912281694137436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Feedbacks:
-  - {fileID: 5596498170223978352}
-  InitializationMode: 2
-  SafeMode: 3
-  AutoPlayOnStart: 0
-  DebugActive: 0
---- !u!114 &5596498170223978352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6834912281694137436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdfe4b9b079619143a9748eeee75e698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  Label: Particles Instantiation
-  Chance: 100
-  Timing:
-    TimescaleMode: 0
-    InitialDelay: 0
-    CooldownDuration: 0
-    NumberOfRepeats: 0
-    RepeatForever: 0
-    DelayBetweenRepeats: 1
-    Sequence: {fileID: 0}
-    TrackID: 0
-    Quantized: 0
-    TargetBPM: 120
-  DebugActive: 0
-  Mode: 0
-  CachedRecycle: 1
-  ParticlesPrefab: {fileID: 0}
-  RandomParticlePrefabs:
-  - {fileID: 3262775422518166471, guid: dd19de8d260a4544aaf59897fbe10b7c, type: 3}
-  - {fileID: 4011700550874226019, guid: d41045928ffb47049910a6d4e3fdb02d, type: 3}
-  - {fileID: 6951402186182983680, guid: cf745fd651ad6204688aa945f8d431a0, type: 3}
-  - {fileID: 198105611435355940, guid: 14c970e5088917041882baa0106b1400, type: 3}
-  - {fileID: 6242884150602676625, guid: fc6222d850acca4499e1569549b03ddb, type: 3}
-  - {fileID: 1938389575172227757, guid: c8f15ebffd22e574aab45afa0b3ede9f, type: 3}
-  - {fileID: 2700207122878138103, guid: 5155d915bb6f93e4195643a95d6e4878, type: 3}
-  PositionMode: 1
-  InstantiateParticlesPosition: {fileID: 4917576795329622555}
-  TargetWorldPosition: {x: 0, y: 0, z: 0}
-  Offset: {x: 0, y: 0, z: 0}
-  NestParticles: 1
 --- !u!1001 &6429794985339815867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6701,12 +6581,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 68021691667e41745913058504a1d954, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 720442d4dd381894b83efa1d1068d5e7, type: 3}
---- !u!4 &6428014767297686383 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4465285574356180, guid: 720442d4dd381894b83efa1d1068d5e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6429794985339815867}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &6371151559787405823 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95095586088904260, guid: 720442d4dd381894b83efa1d1068d5e7,
@@ -6716,6 +6590,12 @@ Animator:
 --- !u!1 &6429070341012566669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1017123011376438, guid: 720442d4dd381894b83efa1d1068d5e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6429794985339815867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6428014767297686383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4465285574356180, guid: 720442d4dd381894b83efa1d1068d5e7,
     type: 3}
   m_PrefabInstance: {fileID: 6429794985339815867}
   m_PrefabAsset: {fileID: 0}

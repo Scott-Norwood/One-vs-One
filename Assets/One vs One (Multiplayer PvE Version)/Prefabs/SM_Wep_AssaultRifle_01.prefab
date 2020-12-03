@@ -335,7 +335,7 @@ MonoBehaviour:
   LaserMaxDistance: 50
   LaserCollisionMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   LaserWidth: {x: 0.004, y: 0.004}
   LaserMaterial: {fileID: 2100000, guid: 03a40f5f57c320742aaa9711986f6a2d, type: 2}
 --- !u!114 &-278139615338254268
@@ -1989,6 +1989,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7259984583475550956, guid: acad01ddb4ce10241aacbfb19d253870,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259984583475550956, guid: acad01ddb4ce10241aacbfb19d253870,
+        type: 3}
       propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
@@ -2000,6 +2005,21 @@ PrefabInstance:
     - target: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
         type: 3}
       propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
+        type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
+        type: 3}
+      propertyPath: CollisionModule.collisionMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8767502607629372110, guid: acad01ddb4ce10241aacbfb19d253870,
@@ -2020,6 +2040,11 @@ PrefabInstance:
     - target: {fileID: 8779148461428220194, guid: acad01ddb4ce10241aacbfb19d253870,
         type: 3}
       propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779148461428220194, guid: acad01ddb4ce10241aacbfb19d253870,
+        type: 3}
+      propertyPath: CollisionModule.collisionMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8894367487095207326, guid: acad01ddb4ce10241aacbfb19d253870,
@@ -2190,6 +2215,11 @@ PrefabInstance:
       propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198284776120775766, guid: 7913054b3bc58d54b9f71fe755fc131f,
+        type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 198792977351378874, guid: 7913054b3bc58d54b9f71fe755fc131f,
         type: 3}
       propertyPath: playOnAwake
@@ -2251,6 +2281,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7902961547855903055, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903050792878878903, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903232072771450853, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7903232072771450853, guid: 6b8172235a64cba4a9e426f90d9806b7,
         type: 3}
       propertyPath: LightsModule.rangeCurve.scalar
@@ -2260,6 +2305,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LightsModule.intensityCurve.scalar
       value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903239830726719137, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7903239830726719137, guid: 6b8172235a64cba4a9e426f90d9806b7,
         type: 3}

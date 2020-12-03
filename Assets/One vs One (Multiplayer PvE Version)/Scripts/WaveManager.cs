@@ -104,11 +104,12 @@ namespace xtilly5000.Prototypes.WaveManager
         public IEnumerator SpawnWave(int waveNumber)
         {
             // Check to see if the wave exists. If it doesn't, then don't try and spawn the wave only to fail miserably.
-            if (waves.Count < waveNumber)
+            if (waves.Count < waveNumber + 1f)
             {
-                Debug.LogError("Wave does not exist!");
+                Debug.LogWarning("Wave does not exist!");
                 yield break;
-            } else
+            }
+            else
             {
                 // Start the Coroutine that will process the wave.
                 yield return StartCoroutine(ProcessWave(waves[waveNumber]));
@@ -154,7 +155,9 @@ namespace xtilly5000.Prototypes.WaveManager
                 // Wait the time specified in the current step data before moving onto the next step, unless it is the last step.
                 if (i != wave.steps.Count - 1)
                 {
-                    yield return new WaitForSeconds(wave.steps[i].timeUntilNextStep);
+                    // Randomize the time between steps.
+                    float waitTime = Random.Range(wave.steps[i].minTimeUntilNextStep, wave.steps[i].maxTimeUntilNextStep);
+                    yield return new WaitForSeconds(waitTime);
                 }
             }
         }
@@ -307,9 +310,13 @@ namespace xtilly5000.Prototypes.WaveManager
     public class Step
     {
         #region Variables
-        // The amount of seconds before the next step.
-        [Tooltip("The amount of seconds before the next step.")]
-        public float timeUntilNextStep;
+        // The maximum amount of seconds before the next step.
+        [Tooltip("The maximum amount of seconds before the next step.")]
+        public float maxTimeUntilNextStep;
+
+        // The minimum amount of seconds before the next step.
+        [Tooltip("The minimum amount of seconds before the next step.")]
+        public float minTimeUntilNextStep;
 
         // The minimum number of time between spawns in seconds.
         [Tooltip("The minimum number of time between spawns in seconds.")]

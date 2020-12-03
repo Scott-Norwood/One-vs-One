@@ -3196,7 +3196,6 @@ GameObject:
   - component: {fileID: 4914906735501121366}
   - component: {fileID: 4914906735501121376}
   - component: {fileID: 1649022929}
-  - component: {fileID: -3709458638091461984}
   m_Layer: 13
   m_Name: Crawler_Zombie
   m_TagString: Untagged
@@ -3402,8 +3401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 0
   TemporaryInvulnerable: 0
-  InitialHealth: 3
-  MaximumHealth: 3
+  InitialHealth: 4
+  MaximumHealth: 4
   Invulnerable: 0
   DamageFeedbacks: {fileID: 0}
   FlickerSpriteOnHit: 0
@@ -3414,11 +3413,11 @@ MonoBehaviour:
   DelayBeforeDestruction: 0
   CollisionsOffOnDeath: 1
   GravityOffOnDeath: 1
-  PointsWhenDestroyed: 125
+  PointsWhenDestroyed: 200
   VibrateOnDeath: 0
   RespawnAtInitialLocation: 0
   ApplyDeathForce: 0
-  DeathForce: {x: 0, y: 10}
+  DeathForce: {x: 0, y: 0}
   ResetForcesOnDeath: 0
 --- !u!114 &4914906735501121367
 MonoBehaviour:
@@ -3524,31 +3523,6 @@ MonoBehaviour:
   HitNonDamageableFeedback: {fileID: 0}
   FreezeFramesOnHitDuration: 0
   Owner: {fileID: 0}
---- !u!114 &-3709458638091461984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4914906735501121381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c732375c7af5d2469f883db01407d16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AbilityStartFeedbacks: {fileID: 0}
-  AbilityStopFeedbacks: {fileID: 0}
-  AbilityPermitted: 1
-  BlockingMovementStates: 
-  BlockingConditionStates: 
-  OnStairs: 0
-  StairsBelow: 0
-  StairsAhead: 0
-  StairsAheadDetectionRaycastOrigin: {x: -0.75, y: 0, z: 0}
-  StairsAheadDetectionRaycastLength: 2
-  StairsBelowDetectionRaycastOrigin: {x: -0.2, y: 0, z: 0}
-  StairsBelowDetectionRaycastLength: 0.25
-  StairsBelowLockTime: 0.2
 --- !u!1 &4914918142885943741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,6 +6417,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 8ec19fd39371ad64b9bdee678d8b09a2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 720442d4dd381894b83efa1d1068d5e7, type: 3}
+--- !u!1 &6429070341012566669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1017123011376438, guid: 720442d4dd381894b83efa1d1068d5e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6429794985339815867}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6428014767297686383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4465285574356180, guid: 720442d4dd381894b83efa1d1068d5e7,
@@ -6452,12 +6432,6 @@ Transform:
 --- !u!95 &6371151559787405823 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95095586088904260, guid: 720442d4dd381894b83efa1d1068d5e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6429794985339815867}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6429070341012566669 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1017123011376438, guid: 720442d4dd381894b83efa1d1068d5e7,
     type: 3}
   m_PrefabInstance: {fileID: 6429794985339815867}
   m_PrefabAsset: {fileID: 0}

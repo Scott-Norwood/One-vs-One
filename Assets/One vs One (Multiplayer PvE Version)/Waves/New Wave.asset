@@ -13,21 +13,13 @@ MonoBehaviour:
   m_Name: New Wave
   m_EditorClassIdentifier: 
   steps:
-  - timeUntilNextStep: 0
-    minSpacing: 0
-    maxSpacing: 0
+  - maxTimeUntilNextStep: 1.25
+    minTimeUntilNextStep: 0.25
+    minSpacing: 0.25
+    maxSpacing: 1
     waitUntilKill: 0
     id: 0
-    maxNumberOfEnemies: 0
-    minNumberOfEnemies: 0
-    skipChance: 0
-    isAdvanced: 0
-  - timeUntilNextStep: 0
-    minSpacing: 0
-    maxSpacing: 0
-    waitUntilKill: 0
-    id: 0
-    maxNumberOfEnemies: 0
-    minNumberOfEnemies: 0
-    skipChance: 0
-    isAdvanced: 0
+    maxNumberOfEnemies: 10
+    minNumberOfEnemies: 3
+    skipChance: 25
+    isAdvanced: 1

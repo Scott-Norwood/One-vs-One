@@ -4,6 +4,7 @@
 // Adapt — remix, transform, and build upon the material for any purpose, even commercially.
 
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace xtilly5000.Prototypes.WaveManager
 {
@@ -38,6 +39,7 @@ namespace xtilly5000.Prototypes.WaveManager
 
         // Lets us know if the wave we spawned was killed or not.
         private bool waveKilled = false;
+
         #endregion
 
         #region Start() Method
@@ -54,14 +56,20 @@ namespace xtilly5000.Prototypes.WaveManager
         }
         #endregion
 
+        public void StartWaveTrigger()
+        {
+            //StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+        }
+
         #region Update() Method
         private void Update()
         {
             // Constantly count down the time left until the next wave, unless the countdown timer is paused.
-            if(TimeLeft > 0f && pause == false && waveKilled == true)
+            if (TimeLeft > 0f && pause == false && waveKilled == true)
             {
                 TimeLeft -= 1 * Time.deltaTime;
-            } else if(pause == false && waveKilled == true)
+            }
+            else if (pause == false && waveKilled == true)
             {
                 // Time ran out, so we want to spawn the next wave.
                 TimeLeft = 0f;

@@ -29,24 +29,11 @@ public class Main_Shop : MonoBehaviour
         mainShopCanvas = GetComponent<Canvas>();
         currentPoints = GameManager.Instance.Points;
         timerIsRunning = false;
-        mainShopCanvas.enabled = false;
+        //mainShopCanvas.enabled = false;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (mainShopCanvas.isActiveAndEnabled == false)
-            {
-                mainShopCanvas.enabled = true;
-                return;
-            }
-            else
-            {
-                mainShopCanvas.enabled = false;
-            }
-        }
-
         if (timerIsRunning)
         {
             if (BuffDuration > 0)

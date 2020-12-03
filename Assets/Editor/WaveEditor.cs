@@ -39,7 +39,7 @@ namespace xtilly5000.Prototypes.WaveManager
             list = new ReorderableList(serializedObject, serializedObject.FindProperty("steps"), true, true, true, true);
 
             // When we draw an element, we want to include these property and label fields.
-            list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => 
+            list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
 
                 // Get the element we want to draw.
@@ -50,46 +50,46 @@ namespace xtilly5000.Prototypes.WaveManager
 
                 // Specify how, and where, to draw the Step index.
                 EditorGUI.LabelField(
-                    new Rect(rect.x, rect.y, 60, EditorGUIUtility.singleLineHeight), 
+                    new Rect(rect.x, rect.y, 60, EditorGUIUtility.singleLineHeight),
                         "Step " + index.ToString());
 
                 // Specify how, and where, to draw the enemy id title.
                 EditorGUI.LabelField(
-                    new Rect(rect.x + 60, rect.y, 60, EditorGUIUtility.singleLineHeight), 
+                    new Rect(rect.x + 60, rect.y, 60, EditorGUIUtility.singleLineHeight),
                         "Enemy Id ");
 
                 // Specify how, and where, to draw the actual id field.
                 EditorGUI.PropertyField(
-                    new Rect(rect.x + 120, rect.y, 60, EditorGUIUtility.singleLineHeight), 
+                    new Rect(rect.x + 120, rect.y, 60, EditorGUIUtility.singleLineHeight),
                         element.FindPropertyRelative("id"), GUIContent.none);
 
                 // Specify how, and where, to draw the advanced grouping title.
                 EditorGUI.LabelField(
-                    new Rect(rect.x + 197, rect.y, 180, EditorGUIUtility.singleLineHeight), 
+                    new Rect(rect.x + 197, rect.y, 180, EditorGUIUtility.singleLineHeight),
                         "Advanced Grouping ");
 
                 // Specify how, and where, to draw the actual advanced grouping field.
                 EditorGUI.PropertyField(
-                    new Rect(rect.x + 320, rect.y, 60, EditorGUIUtility.singleLineHeight), 
+                    new Rect(rect.x + 320, rect.y, 60, EditorGUIUtility.singleLineHeight),
                         element.FindPropertyRelative("isAdvanced"), GUIContent.none);
             };
 
             // This is called when the inspector draws the list title.
-            list.drawHeaderCallback = (Rect rect) => 
+            list.drawHeaderCallback = (Rect rect) =>
             {
                 // We want to change it to write our own custom title.
                 EditorGUI.LabelField(rect, "Wave Enemy Groups");
             };
 
             // This is called to check if we are able to remove an entry from the list.
-            list.onCanRemoveCallback = (ReorderableList l) => 
+            list.onCanRemoveCallback = (ReorderableList l) =>
             {
                 // We always want to have at least one step per wave, so make sure that it doesn't let us remove the last one.
                 return l.count > 1;
             };
 
             // This is called when an entry is removed.
-            list.onRemoveCallback = (ReorderableList l) => 
+            list.onRemoveCallback = (ReorderableList l) =>
             {
                 // We want to make sure that the user meant to remove the entry, so prompt them with a confirmation dialogue.
                 if (EditorUtility.DisplayDialog("Warning!", "Are you sure you want to delete this group of enemies?", "Yes", "No"))
@@ -109,7 +109,7 @@ namespace xtilly5000.Prototypes.WaveManager
             };
 
             // This is called when an entry is added.
-            list.onAddCallback = (ReorderableList l) => 
+            list.onAddCallback = (ReorderableList l) =>
             {
                 // We want to get the index of the added entry.
                 int index = l.serializedProperty.arraySize;
@@ -126,11 +126,11 @@ namespace xtilly5000.Prototypes.WaveManager
             };
 
             // This is called when we want to add a new entry. It gives us a dropdown of options to add.
-            list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) => 
+            list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) =>
             {
                 // We want to create a new menu and make a reference to it for later.
                 GenericMenu menu = new GenericMenu();
-                
+
                 // Add the two menu items, and pass in the CreationHandler for handling the initialization of the item.
                 menu.AddItem(new GUIContent("Simple Step"), false, CreationHandler, new StepCreationParams() { isAdvanced = false });
                 menu.AddItem(new GUIContent("Advanced Step"), false, CreationHandler, new StepCreationParams() { isAdvanced = true });
@@ -148,7 +148,7 @@ namespace xtilly5000.Prototypes.WaveManager
         public override void OnInspectorGUI()
         {
             // If we aren't in debug mode, show the custom inspector GUI.
-            if(!debugMode)
+            if (!debugMode)
             {
                 // Create some spacing to let the UI breathe, and display a reference to the currently selected object at the top of the inspector window.
                 EditorGUILayout.Space();
@@ -174,18 +174,27 @@ namespace xtilly5000.Prototypes.WaveManager
                     SerializedProperty element = list.serializedProperty.GetArrayElementAtIndex(index);
 
                     // Is this entry an advanced entry? If it is, we want to do some special logic.
-                    if(element.FindPropertyRelative("isAdvanced").boolValue)
+                    if (element.FindPropertyRelative("isAdvanced").boolValue)
                     {
                         // Create some spacing and label the fields properly.
                         EditorGUILayout.Space();
                         EditorGUILayout.LabelField("Control Flow", EditorStyles.boldLabel);
 
-                        // Show the proper editable field for timeUntilNextStep.
-                        float timeUntilNextStep = EditorGUILayout.FloatField(new GUIContent("Time Until Next Step", "The amount of seconds before the next step."), element.FindPropertyRelative("timeUntilNextStep").floatValue);
-                        if (timeUntilNextStep != element.FindPropertyRelative("timeUntilNextStep").floatValue)
+                        // Show the proper editable field for maxTimeUntilNextStep.
+                        float maxTimeUntilNextStep = EditorGUILayout.FloatField(new GUIContent("Max Time Until Next Step", "The maximum amount of seconds before the next step."), element.FindPropertyRelative("maxTimeUntilNextStep").floatValue);
+                        if (maxTimeUntilNextStep != element.FindPropertyRelative("maxTimeUntilNextStep").floatValue)
                         {
                             // The value changed, save the modifications to the object.
-                            element.FindPropertyRelative("timeUntilNextStep").floatValue = timeUntilNextStep;
+                            element.FindPropertyRelative("maxTimeUntilNextStep").floatValue = maxTimeUntilNextStep;
+                            serializedObject.ApplyModifiedProperties();
+                        }
+
+                        // Show the proper editable field for minTimeUntilNextStep.
+                        float minTimeUntilNextStep = EditorGUILayout.FloatField(new GUIContent("Min Time Until Next Step", "The minimum amount of seconds before the next step."), element.FindPropertyRelative("minTimeUntilNextStep").floatValue);
+                        if (minTimeUntilNextStep != element.FindPropertyRelative("minTimeUntilNextStep").floatValue)
+                        {
+                            // The value changed, save the modifications to the object.
+                            element.FindPropertyRelative("minTimeUntilNextStep").floatValue = minTimeUntilNextStep;
                             serializedObject.ApplyModifiedProperties();
                         }
 
@@ -290,21 +299,22 @@ namespace xtilly5000.Prototypes.WaveManager
                         {
                             hasSelected = false;
                         }
-                    } 
+                    }
                     else
                     {
                         // Create some spacing and label the fields properly.
                         EditorGUILayout.Space();
                         EditorGUILayout.LabelField("Control Flow", EditorStyles.boldLabel);
 
-                        // Show the proper editable field for timeUntilNextStep.
-                        float timeUntilNextStep = EditorGUILayout.FloatField(new GUIContent("Time Until Next Step", "The amount of seconds before the next step."), element.FindPropertyRelative("timeUntilNextStep").floatValue);
-                        if (timeUntilNextStep != element.FindPropertyRelative("timeUntilNextStep").floatValue)
+                        // Show the proper editable field for maxTimeUntilNextStep.
+                        float maxTimeUntilNextStep = EditorGUILayout.FloatField(new GUIContent("Max Time Until Next Step", "The maximum amount of seconds before the next step."), element.FindPropertyRelative("maxTimeUntilNextStep").floatValue);
+                        if (maxTimeUntilNextStep != element.FindPropertyRelative("maxTimeUntilNextStep").floatValue)
                         {
                             // The value changed, save the modifications to the object.
-                            element.FindPropertyRelative("timeUntilNextStep").floatValue = timeUntilNextStep;
+                            element.FindPropertyRelative("maxTimeUntilNextStep").floatValue = maxTimeUntilNextStep;
                             serializedObject.ApplyModifiedProperties();
                         }
+                        element.FindPropertyRelative("minTimeUntilNextStep").floatValue = element.FindPropertyRelative("maxTimeUntilNextStep").floatValue;
 
                         // Show the proper editable field for waitUntilKill.
                         bool waitUntilKill = EditorGUILayout.Toggle(new GUIContent("Wait Until Kill", "Do we want to wait until the enemies in this step are killed before moving on to the next step?"), element.FindPropertyRelative("waitUntilKill").boolValue);
@@ -372,7 +382,7 @@ namespace xtilly5000.Prototypes.WaveManager
                     // There is no currently selected step, so we need to select one first. Otherwise, there may be null reference exceptions.
                     EditorGUILayout.HelpBox("Select a step to modify it!", MessageType.Info);
                 }
-            } 
+            }
             else
             {
                 // Since we are in debug mode, we want to draw the normal inspector GUI.
@@ -406,20 +416,21 @@ namespace xtilly5000.Prototypes.WaveManager
 
             // Set the selected entry in the list to the newly added element.
             list.index = index;
-            
+
             // Get the SerializedProperty from the element, effectively giving us a reference to where the data is stored.
             SerializedProperty element = list.serializedProperty.GetArrayElementAtIndex(index);
 
             // Set the default values for the newly created entry.
             element.FindPropertyRelative("isAdvanced").boolValue = data.isAdvanced;
             element.FindPropertyRelative("waitUntilKill").boolValue = false;
-            element.FindPropertyRelative("timeUntilNextStep").floatValue = 1f;
             element.FindPropertyRelative("maxSpacing").floatValue = 1f;
             element.FindPropertyRelative("minSpacing").floatValue = 1f;
             element.FindPropertyRelative("id").intValue = 0;
             element.FindPropertyRelative("maxNumberOfEnemies").intValue = 0;
             element.FindPropertyRelative("minNumberOfEnemies").intValue = 0;
             element.FindPropertyRelative("skipChance").intValue = 0;
+            element.FindPropertyRelative("maxTimeUntilNextStep").floatValue = 1f;
+            element.FindPropertyRelative("minTimeUntilNextStep").floatValue = 1f;
 
             // Apply the changes to the entry and deselect it.
             serializedObject.ApplyModifiedProperties();
