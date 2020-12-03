@@ -35,20 +35,22 @@ namespace xtilly5000.Prototypes.WaveManager
         public static event OnWaveKilledDelegate OnWaveKilled;
 
         // Create an event system that triggers when a step starts spawning.
-        public delegate void StepStartSpawningDelegate(Step step);
-        public static event StepStartSpawningDelegate OnStepStartSpawning;
+        private delegate void StepStartSpawningDelegate(Step step);
+        private static event StepStartSpawningDelegate OnStepStartSpawning;
 
         // Create an event system that triggers when a step finishes spawning.
-        public delegate void StepFinishedSpawningDelegate(Step step);
-        public static event StepFinishedSpawningDelegate OnStepFinishedSpawning;
+        private delegate void StepFinishedSpawningDelegate(Step step);
+        private static event StepFinishedSpawningDelegate OnStepFinishedSpawning;
         #endregion
 
         #region Variables
         // The wave data.
+        [Header("List of Waves")]
         public List<Wave> waves = new List<Wave>();
 
         // The list of references to prefabs for spawning enemies.
-        // public Dictionary<EnemyTypes, GameObject> prefabs = new Dictionary<EnemyTypes, GameObject>();
+        [Header("Prefab References")]
+        [Space]
         public List<GameObject> prefabs = new List<GameObject>();
 
         // Part of the Singleton Pattern. This is to make sure that only one instance of WaveManager exists at one time.
@@ -102,12 +104,11 @@ namespace xtilly5000.Prototypes.WaveManager
         public IEnumerator SpawnWave(int waveNumber)
         {
             // Check to see if the wave exists. If it doesn't, then don't try and spawn the wave only to fail miserably.
-            if (waves.Count - 1 < waveNumber)
+            if (waves.Count < waveNumber)
             {
-                Debug.LogWarning("Wave does not exist! Could not spawn wave.");
+                Debug.LogError("Wave does not exist!");
                 yield break;
-            }
-            else
+            } else
             {
                 // Start the Coroutine that will process the wave.
                 yield return StartCoroutine(ProcessWave(waves[waveNumber]));
@@ -134,7 +135,7 @@ namespace xtilly5000.Prototypes.WaveManager
             for (int i = 0; i < wave.steps.Count; i++)
             {
                 // If the step requires us to wait until the enemies are killed, then wait! We also wait for last enemy to be killed in a wave before finishing the process.
-                if (wave.steps[i].timingData.waitUntilKill && i != wave.steps.Count - 1)
+                if (wave.steps[i].waitUntilKill && i != wave.steps.Count - 1)
                 {
                     // Yield return this Coroutine so that the execution of ProcessWave does not finish until the current step finishes execution.
                     yield return StartCoroutine(ProcessStep(wave.steps[i], wave, false));
@@ -153,7 +154,7 @@ namespace xtilly5000.Prototypes.WaveManager
                 // Wait the time specified in the current step data before moving onto the next step, unless it is the last step.
                 if (i != wave.steps.Count - 1)
                 {
-                    yield return new WaitForSeconds(wave.steps[i].timingData.timeUntilNextStep);
+                    yield return new WaitForSeconds(wave.steps[i].timeUntilNextStep);
                 }
             }
         }
@@ -172,7 +173,7 @@ namespace xtilly5000.Prototypes.WaveManager
             OnStepStartSpawning?.Invoke(step);
 
             // Randomize the enemy count.
-            int enemies = Random.Range(step.enemyData.minNumberOfEnemies, step.enemyData.maxNumberOfEnemies);
+            int enemies = Random.Range(step.minNumberOfEnemies, step.maxNumberOfEnemies);
 
             // Create a list for storing all of the references to enemies spawned in the current step.
             List<WaveEnemy> references = new List<WaveEnemy>();
@@ -201,17 +202,17 @@ namespace xtilly5000.Prototypes.WaveManager
                 // Only wait for spacing time after the first iteration.
                 if (i != 0)
                 {
-                    yield return new WaitForSeconds(Random.Range(step.timingData.minSpacing, step.timingData.maxSpacing));
+                    yield return new WaitForSeconds(Random.Range(step.minSpacing, step.maxSpacing));
                 }
 
-                if (prefabs.Count <= step.enemyData.id)
+                if (prefabs.Count <= step.id)
                 {
                     Debug.LogWarning("Could not spawn enemy. The enemy id has no prefab associated with it!");
                 }
                 else
                 {
                     // Spawn the enemy and add the references to the global (all waves) and local (current step) reference lists.
-                    WaveEnemy enemy = SpawnEnemy(step.enemyData.id);
+                    WaveEnemy enemy = SpawnEnemy(step.id);
                     references.Add(enemy);
 
                     KeyValuePair<Wave, WaveEnemy> pair = new KeyValuePair<Wave, WaveEnemy>(enemy.wave, enemy);
@@ -305,58 +306,42 @@ namespace xtilly5000.Prototypes.WaveManager
     [System.Serializable]
     public class Step
     {
-        #region StepTimingData Struct
-        [System.Serializable]
-        public struct StepTimingData
-        {
-            // How many seconds until the next step starts.
-            [Tooltip("How many seconds until the next step starts.")]
-            public float timeUntilNextStep;
-
-            // The minimum amount of spacing between enemies in seconds.
-            [Tooltip("The minimum amount of spacing between enemies in seconds.")]
-            public float minSpacing;
-
-            // The maximum amount of spacing between enemies in seconds.
-            [Tooltip("The maximum amount of spacing between enemies in seconds.")]
-            public float maxSpacing;
-
-            // Do we want to wait until the enemies are killed before moving onto the next step?
-            [Tooltip("Do we want to wait until the enemies are killed before moving onto the next step?")]
-            public bool waitUntilKill;
-        }
-        #endregion
-
-        #region StepEnemyData Struct
-        [System.Serializable]
-        public struct StepEnemyData
-        {
-            // The id of the enemy that we want to spawn.
-            [Tooltip("The id of the enemy that we want to spawn.")]
-            public int id;
-
-            // The maximum number of enemies we want to spawn in this step.
-            [Tooltip("The maximum number of enemies we want to spawn in this step.")]
-            public int maxNumberOfEnemies;
-
-            // The minimum number of enemies we want to spawn in this step.
-            [Tooltip("The minimum number of enemies we want to spawn in this step.")]
-            public int minNumberOfEnemies;
-        }
-        #endregion
-
         #region Variables
-        // The timing data for the current step.
-        [Tooltip("The timing data for the current step.")]
-        public StepTimingData timingData;
+        // The amount of seconds before the next step.
+        [Tooltip("The amount of seconds before the next step.")]
+        public float timeUntilNextStep;
 
-        // The enemy data for the current step.
-        [Tooltip("The timing data for the current step.")]
-        public StepEnemyData enemyData;
+        // The minimum number of time between spawns in seconds.
+        [Tooltip("The minimum number of time between spawns in seconds.")]
+        public float minSpacing;
 
-        // The chance that this step will be skipped entirely as a percentage.
-        [Tooltip("The chance that this step will be skipped entirely as a percentage.")]
+        // The maximum number of time between spawns in seconds.
+        [Tooltip("The maximum number of time between spawns in seconds.")]
+        public float maxSpacing;
+
+        // Do we want to wait until the enemies in this step are killed before moving on to the next step?
+        [Tooltip("Do we want to wait until the enemies in this step are killed before moving on to the next step?")]
+        public bool waitUntilKill;
+
+        // The ID of the enemy that we want to spawn.
+        [Tooltip("The ID of the enemy that we want to spawn.")]
+        public int id;
+
+        // The maximum number of enemies to spawn this step.
+        [Tooltip("The maximum number of enemies to spawn this step.")]
+        public int maxNumberOfEnemies;
+
+        // The minimum number of enemies to spawn this step.
+        [Tooltip("The minimum number of enemies to spawn this step.")]
+        public int minNumberOfEnemies;
+
+        // The chance, in a percentage, to skip this step.
+        [Tooltip("The chance, in a percentage, to skip this step.")]
         public int skipChance;
+
+        // Should the editor show advanced customization options?
+        [Tooltip("Should the editor show advanced customization options?")]
+        public bool isAdvanced;
         #endregion
     }
     #endregion

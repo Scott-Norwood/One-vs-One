@@ -5,6 +5,7 @@ using MoreMountains.Tools;
 using UnityEngine.UI;
 using MoreMountains.CorgiEngine;
 using TMPro;
+using xtilly5000.Prototypes.WaveManager;
 
 public class Main_Shop : MonoBehaviour
 {
@@ -14,14 +15,14 @@ public class Main_Shop : MonoBehaviour
     [SerializeField] public float WeaponSpeedIncrease;
     [SerializeField] public float WeaponReloadIncrease;
     [SerializeField] public bool WeaponMagazineBased;
-     [SerializeField] public float BuffDuration;
-    [SerializeField] TMP_Text buffTimer;    
+    [SerializeField] public float BuffDuration;
+    [SerializeField] TMP_Text buffTimer;
 
     //Hidden Values 
-    [SerializeField,HideInInspector] Canvas mainShopCanvas;
-    [SerializeField,HideInInspector] bool isShopOpen;
+    [SerializeField, HideInInspector] Canvas mainShopCanvas;
+    [SerializeField, HideInInspector] bool isShopOpen;
     [HideInInspector] bool timerIsRunning = false;
-    [SerializeField,HideInInspector] int currentPoints;    
+    [SerializeField, HideInInspector] int currentPoints;
 
     void Start()
     {
@@ -38,13 +39,11 @@ public class Main_Shop : MonoBehaviour
             if (mainShopCanvas.isActiveAndEnabled == false)
             {
                 mainShopCanvas.enabled = true;
-                
                 return;
             }
             else
             {
                 mainShopCanvas.enabled = false;
-                
             }
         }
 

@@ -19,7 +19,13 @@ namespace xtilly5000.Prototypes.WaveManager
         // A list of the steps in the wave.
         [Tooltip("A list of the steps in the wave.")]
         [Header("Wave Information")]
-        public List<Step> steps;
+        public List<Step> steps = new List<Step>()
+        {
+            new Step()
+            {
+                // We do not want any information in the newly created step, so leave this blank.
+            }
+        };
         #endregion
     }
     #endregion
