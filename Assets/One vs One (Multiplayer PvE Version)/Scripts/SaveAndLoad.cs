@@ -9,7 +9,7 @@ public class SaveAndLoad : MonoBehaviour
     int _gamePoints;
     int _gameMaxLives;
     int _currentWaveAttempt;
-    WaveSpawnerTest waveSpawnerTest;
+    WaveSpawner WaveSpawner;
     public static SaveAndLoad i_SaveAndLoad;
 
     // In this method were setting up a reference and loading in the save data before the scene loads
@@ -30,14 +30,14 @@ public class SaveAndLoad : MonoBehaviour
         // If the scene we're on isn't the mainmenu, we then load the relevent data
         if (SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
         {
-            waveSpawnerTest = FindObjectOfType<WaveSpawnerTest>();
+            WaveSpawner = FindObjectOfType<WaveSpawner>();
             _gamePoints = ES3.Load("GamePoints", GameManager.Instance.Points);
             _gameMaxLives = ES3.Load("GameMaxLives", GameManager.Instance.MaximumLives);
-            _currentWaveAttempt = ES3.Load("CurrentWaveAttempt", waveSpawnerTest.currentAttemptedWave);
+            _currentWaveAttempt = ES3.Load("CurrentWaveAttempt", WaveSpawner.currentAttemptedWave);
 
             GameManager.Instance.SetPoints(_gamePoints);
             GameManager.Instance.CurrentLives = _gameMaxLives;
-            waveSpawnerTest.currentAttemptedWave = _currentWaveAttempt;
+            WaveSpawner.currentAttemptedWave = _currentWaveAttempt;
             Debug.Log("Loading");
         }
     }
@@ -47,13 +47,13 @@ public class SaveAndLoad : MonoBehaviour
     {
         _gamePoints = GameManager.Instance.Points;
 
-        if (waveSpawnerTest == null)
+        if (WaveSpawner == null)
         {
             return;
         }
         else
         {
-            _currentWaveAttempt = waveSpawnerTest.currentAttemptedWave;
+            _currentWaveAttempt = WaveSpawner.currentAttemptedWave;
         }
 
         Debug.Log(_currentWaveAttempt);
@@ -63,7 +63,7 @@ public class SaveAndLoad : MonoBehaviour
         {
             ES3.Save("GamePoints", GameManager.Instance.Points);
             ES3.Save("GameMaxLives", GameManager.Instance.MaximumLives);
-            ES3.Save("CurrentWaveAttempt", waveSpawnerTest.currentAttemptedWave);
+            ES3.Save("CurrentWaveAttempt", WaveSpawner.currentAttemptedWave);
             Debug.Log("Saving");
         }
         else
@@ -102,6 +102,6 @@ public class SaveAndLoad : MonoBehaviour
     void WantsToQuit()
     {
         ES3.Save("GamePoints", GameManager.Instance.Points);
-        ES3.Save("CurrentWaveAttempt", waveSpawnerTest.currentAttemptedWave);
+        ES3.Save("CurrentWaveAttempt", WaveSpawner.currentAttemptedWave);
     }
 }

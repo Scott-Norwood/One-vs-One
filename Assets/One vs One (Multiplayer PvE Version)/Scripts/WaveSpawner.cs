@@ -10,12 +10,12 @@ using TMPro;
 
 namespace xtilly5000.Prototypes.WaveManager
 {
-    #region WaveSpawnerTest Class
+    #region WaveSpawner Class
     /// <summary>
-    /// WaveSpawnerTest class is used for testing the WaveManager.
+    /// WaveSpawner class is used for testing the WaveManager.
     /// It can be modified to serve a wide variety of purposes.
     /// </summary>
-    public class WaveSpawnerTest : MonoBehaviour
+    public class WaveSpawner : MonoBehaviour
     {
         #region Variables
         // Spawn the enemies with the proper location and rotation.

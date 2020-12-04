@@ -8,18 +8,18 @@ public class GUIManager : MonoBehaviour
 {
 
     public TMP_Text _waveText;
-    WaveSpawnerTest waveSpawnerTest;
+    WaveSpawner WaveSpawner;
 
     // Start is called before the first frame update
     void Start()
     {
-        waveSpawnerTest = FindObjectOfType<WaveSpawnerTest>();
+        WaveSpawner = FindObjectOfType<WaveSpawner>();
         WaveManager.OnWaveKilled += OnWaveKilled;
-        _waveText.text = "Wave: " + (waveSpawnerTest.currentWave + 1f);
+        _waveText.text = "Wave: " + (WaveSpawner.currentWave + 1f);
     }
 
     private void OnWaveKilled(Wave wave)
     {
-        _waveText.text = "Wave: " + (waveSpawnerTest.currentWave + 2f);
+        _waveText.text = "Wave: " + (WaveSpawner.currentWave + 2f);
     }
 }
