@@ -13,14 +13,15 @@ public class GUIManager : MonoBehaviour
 
     void Start()
     {
+        // References set here:
         _waveText = _waveTextGameobject.GetComponent<TMP_Text>();
         _waveTextAnimator = _waveTextGameobject.GetComponent<Animator>();
-
         WaveSpawner = FindObjectOfType<WaveSpawner>();
         WaveManager.OnWaveKilled += OnWaveKilled;
 
-
+        // Setup here:
         _waveText.text = "Wave: " + (WaveSpawner.currentWave);
+        _waveTextAnimator.SetTrigger("textTrigger");
 
     }
 
@@ -30,5 +31,6 @@ public class GUIManager : MonoBehaviour
     private void OnWaveKilled(Wave wave)
     {
         _waveText.text = "Wave: " + (WaveSpawner.currentWave);
+        _waveTextAnimator.SetTrigger("textTrigger");
     }
 }

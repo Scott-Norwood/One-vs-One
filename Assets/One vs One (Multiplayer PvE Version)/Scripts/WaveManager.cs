@@ -119,6 +119,7 @@ namespace xtilly5000.Prototypes.WaveManager
             if (waves.Count < waveNumber + 1f)
             {
                 Debug.LogWarning("Wave does not exist!");
+                Application.Quit(); //##########ADDED THIS FOR TESTING, JUST QUITS THE APPLICATION IF THERE IS NO MORE WAVES!##############
                 yield break;
             }
             else
