@@ -5,6 +5,8 @@
 
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
+using TMPro;
 
 namespace xtilly5000.Prototypes.WaveManager
 {
@@ -23,13 +25,16 @@ namespace xtilly5000.Prototypes.WaveManager
         // Keeps track of the current wave.
         [Header("Wave Control Flow")]
         [Space]
-        public int currentWave = 0;
+        public int currentWave;
+        public int currentAttemptedWave;
 
         // The amount of time between wave spawns in seconds.
         public float timeBetweenWaves = 0f;
 
         // Do we want to pause the wave timer?
         public bool pause = false;
+
+        //public TMP_Text text;
 
         // The amount of time left before the next wave starts in seconds.
         // Other classes might want to check this, for displaying on the screen etc.
@@ -45,6 +50,8 @@ namespace xtilly5000.Prototypes.WaveManager
         #region Start() Method
         private void Start()
         {
+            currentWave = currentAttemptedWave;
+
             // Register all of the event functions for later use.
             WaveManager.OnWaveFinishedSpawning += OnWaveFinishedSpawning;
             WaveManager.OnSpawnEnemy += OnSpawnEnemy;
@@ -52,13 +59,16 @@ namespace xtilly5000.Prototypes.WaveManager
             WaveManager.OnWaveKilled += OnWaveKilled;
 
             // Start spawning the first wave!
-            StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+            //StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+
+
+            //text.text = "Wave: " + (currentWave + 1f);
         }
         #endregion
 
         public void StartWaveTrigger()
         {
-            //StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+            StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
         }
 
         #region Update() Method
@@ -108,8 +118,10 @@ namespace xtilly5000.Prototypes.WaveManager
         {
             // Triggers when all enemies in a wave are killed.
             currentWave++;
+            currentAttemptedWave = currentWave;
             waveKilled = true;
             TimeLeft = timeBetweenWaves;
+            //text.text = "Wave: " + (currentWave + 1f);
         }
         #endregion
     }
