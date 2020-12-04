@@ -22,19 +22,21 @@ namespace xtilly5000.Prototypes.WaveManager
         [Header("Spawn Settings")]
         public GameObject spawnPoint;
 
-        // Keeps track of the current wave.
-        [Header("Wave Control Flow")]
-        [Space]
-        public int currentWave;
+        public int currentWave
+        {
+            get { return _currentWave + 1; }
+        }
+
+        private int _currentWave;
         public int currentAttemptedWave;
 
+        [Header("Wave Control Flow")]
+        [Space]
         // The amount of time between wave spawns in seconds.
         public float timeBetweenWaves = 0f;
 
         // Do we want to pause the wave timer?
         public bool pause = false;
-
-        //public TMP_Text text;
 
         // The amount of time left before the next wave starts in seconds.
         // Other classes might want to check this, for displaying on the screen etc.
@@ -50,25 +52,19 @@ namespace xtilly5000.Prototypes.WaveManager
         #region Start() Method
         private void Start()
         {
-            currentWave = currentAttemptedWave;
+            _currentWave = currentAttemptedWave;
 
             // Register all of the event functions for later use.
             WaveManager.OnWaveFinishedSpawning += OnWaveFinishedSpawning;
-            WaveManager.OnSpawnEnemy += OnSpawnEnemy;
             WaveManager.OnWaveStartSpawning += OnWaveStartSpawning;
             WaveManager.OnWaveKilled += OnWaveKilled;
 
-            // Start spawning the first wave!
-            //StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
-
-
-            //text.text = "Wave: " + (currentWave + 1f);
         }
         #endregion
 
         public void StartWaveTrigger()
         {
-            StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+            StartCoroutine(WaveManager.Instance.SpawnWave(_currentWave));
         }
 
         #region Update() Method
@@ -84,7 +80,7 @@ namespace xtilly5000.Prototypes.WaveManager
                 // Time ran out, so we want to spawn the next wave.
                 TimeLeft = 0f;
                 waveKilled = false;
-                StartCoroutine(WaveManager.Instance.SpawnWave(currentWave));
+                StartCoroutine(WaveManager.Instance.SpawnWave(_currentWave));
             }
         }
         #endregion
@@ -93,16 +89,6 @@ namespace xtilly5000.Prototypes.WaveManager
         private void OnWaveFinishedSpawning(Wave wave)
         {
             // Triggers when a wave finishes spawning.
-        }
-        #endregion
-
-        #region OnSpawnEnemy() Method
-        private void OnSpawnEnemy(WaveEnemy enemy)
-        {
-            // Triggers when an enemy is spawned.
-            // We want to set the proper position and rotation for the spawned enemy.
-            enemy.obj.transform.position = spawnPoint.transform.position;
-            enemy.obj.transform.rotation = spawnPoint.transform.rotation;
         }
         #endregion
 
@@ -117,11 +103,10 @@ namespace xtilly5000.Prototypes.WaveManager
         private void OnWaveKilled(Wave wave)
         {
             // Triggers when all enemies in a wave are killed.
-            currentWave++;
-            currentAttemptedWave = currentWave;
+            _currentWave++;
+            currentAttemptedWave = _currentWave;
             waveKilled = true;
             TimeLeft = timeBetweenWaves;
-            //text.text = "Wave: " + (currentWave + 1f);
         }
         #endregion
     }

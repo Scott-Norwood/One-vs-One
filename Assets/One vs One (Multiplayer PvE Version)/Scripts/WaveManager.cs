@@ -18,9 +18,12 @@ namespace xtilly5000.Prototypes.WaveManager
     public class WaveManager : MonoBehaviour
     {
         #region Events
+
+#pragma warning disable 67
         // Create an event system that triggers when an enemy is spawned.
         public delegate void SpawnEnemyDelegate(WaveEnemy enemy);
         public static event SpawnEnemyDelegate OnSpawnEnemy;
+#pragma warning restore 67
 
         // Create an event system that triggers when a wave starts spawning.
         public delegate void WaveStartSpawningDelegate(Wave wave);
@@ -59,6 +62,8 @@ namespace xtilly5000.Prototypes.WaveManager
 
         // Do not modify! This is the list of currently spawned enemies.
         private readonly List<KeyValuePair<Wave, WaveEnemy>> enemyReferences = new List<KeyValuePair<Wave, WaveEnemy>>();
+
+        private WaveSpawner spawner;
         #endregion
 
         #region Awake() Method
@@ -76,8 +81,15 @@ namespace xtilly5000.Prototypes.WaveManager
                 // If there is no WaveManager instance already present, then create a reference to this one.
                 _instance = this;
             }
+            //DontDestroyOnLoad(this);
+            spawner = FindObjectOfType<WaveSpawner>();
         }
         #endregion
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
 
         #region SpawnWave() Enumerator
         /// <summary>
@@ -268,8 +280,11 @@ namespace xtilly5000.Prototypes.WaveManager
                 obj = GameObject.Instantiate(prefabs[id])
             };
 
+            //enemy.obj.transform.position = FindObjectOfType<WaveSpawner>().spawnPoint.transform.position;
+            enemy.obj.transform.position = spawner.spawnPoint.transform.position;
+
             // Invoke the proper event for spawning an enemy.
-            OnSpawnEnemy?.Invoke(enemy);
+            //OnSpawnEnemy?.Invoke(enemy);
 
             // Return the reference for later use.
             return enemy;
