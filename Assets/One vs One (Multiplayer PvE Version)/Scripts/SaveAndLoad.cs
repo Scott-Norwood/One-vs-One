@@ -11,7 +11,6 @@ public class SaveAndLoad : MonoBehaviour
     // In this method were setting up a reference and loading in the save data before the scene loads
     void Awake()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         // Checks if we have a savemanager in the scene and if not, adds one, if so, destroys this.
         if (i_SaveAndLoad == null)
         {
@@ -23,6 +22,7 @@ public class SaveAndLoad : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        SceneManager.activeSceneChanged += OnSceneLoaded;
     }
 
     private void Load()
@@ -41,7 +41,7 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, Scene next)
     {
         Load();
     }
