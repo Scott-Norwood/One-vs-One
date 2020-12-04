@@ -1,0 +1,133 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MoreMountains.Tools;
+using UnityEngine.UI;
+using MoreMountains.CorgiEngine;
+using TMPro;
+using xtilly5000.Prototypes.WaveManager;
+
+public class Main_Shop : MonoBehaviour
+{
+
+    [Header("Weapon Shop Buff Stats")]
+    public int WeaponDamageIncrease;
+    public float WeaponSpeedIncrease;
+    public float WeaponReloadIncrease;
+    public bool WeaponMagazineBased;
+    public float BuffDuration;
+
+    [Header("Shop Item Values")]
+    public Button[] buttons;
+
+
+    //Hidden Values 
+    Canvas mainShopCanvas;
+    bool isShopOpen;
+    bool timerIsRunning = false;
+    int currentPoints;
+    TMP_Text buffTimer;
+
+
+    void Start()
+    {
+        mainShopCanvas = GetComponent<Canvas>();
+        currentPoints = GameManager.Instance.Points;
+        timerIsRunning = false;
+        //mainShopCanvas.enabled = false;
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            Debug.Log(buttons[i]);
+        }
+    }
+
+    void Update()
+    {
+        if (timerIsRunning)
+        {
+            if (BuffDuration > 0)
+            {
+                BuffDuration -= Time.deltaTime;
+                DisplayTime(BuffDuration);
+            }
+            else
+            {
+
+                BuffDuration = 0;
+                timerIsRunning = false;
+            }
+        }
+    }
+
+    #region All shop button methods go in here
+    public void WeaponDamageButton()
+    {
+        if (currentPoints >= 500)
+        {
+            GameManager.Instance.SetPoints(currentPoints -= 500);
+            timerIsRunning = true;
+        }
+        else
+        {
+            timerIsRunning = false;
+            return;
+        }
+        MMEventManager.TriggerEvent(new MMGameEvent("WeaponDamageIncrease"));
+    }
+
+    public void WeaponSpeedButton()
+    {
+        if (currentPoints >= 500)
+        {
+            GameManager.Instance.SetPoints(currentPoints -= 500);
+            timerIsRunning = true;
+        }
+        else
+        {
+            timerIsRunning = false;
+            return;
+        }
+        MMEventManager.TriggerEvent(new MMGameEvent("WeaponSpeedIncrease"));
+    }
+
+    public void WeaponReloadButton()
+    {
+        if (currentPoints >= 500)
+        {
+            GameManager.Instance.SetPoints(currentPoints -= 500);
+            timerIsRunning = true;
+        }
+        else
+        {
+            timerIsRunning = false;
+            return;
+        }
+        MMEventManager.TriggerEvent(new MMGameEvent("WeaponReloadIncrease"));
+    }
+
+    public void WeaponMagazineButton()
+    {
+        GameManager.Instance.SetPoints(currentPoints -= 500);
+        timerIsRunning = true;
+
+        MMEventManager.TriggerEvent(new MMGameEvent("WeaponMagazineIncrease"));
+    }
+
+    public void AddPointsDebug()
+    {
+        MoreMountains.CorgiEngine.GameManager.Instance.AddPoints(10000);
+    }
+
+    #endregion
+
+    void DisplayTime(float timeToDisplay) // Buff Timer, just really generic for now
+    {
+        timeToDisplay += 1;
+
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        buffTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+}
