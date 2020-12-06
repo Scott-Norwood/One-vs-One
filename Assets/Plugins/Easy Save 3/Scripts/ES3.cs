@@ -9,12 +9,12 @@ using UnityEngine.Networking;
 
 public static class ES3
 {
-	public enum Location 		{ File, PlayerPrefs, InternalMS, Resources, Cache };
-	public enum Directory		{ PersistentDataPath, DataPath }
-	public enum EncryptionType 	{ None, AES };
-    public enum CompressionType { None, Gzip};
-    public enum Format 			{ JSON, Binary_Alpha };
-	public enum ReferenceMode	{ ByRef, ByValue, ByRefAndValue};
+    public enum Location { File, PlayerPrefs, InternalMS, Resources, Cache };
+    public enum Directory { PersistentDataPath, DataPath }
+    public enum EncryptionType { None, AES };
+    public enum CompressionType { None, Gzip };
+    public enum Format { JSON, Binary_Alpha };
+    public enum ReferenceMode { ByRef, ByValue, ByRefAndValue };
 
     #region ES3.Save
 
@@ -516,7 +516,7 @@ public static class ES3
     /// <param name="key">The key which identifies the value we want to load.</param>
     /// <param name="defaultValue">The value we want to return if the file or key does not exist.</param>
     /// <param name="filePath">The relative or absolute path of the file we want to load from.</param>
-    public static string LoadString(string key, string defaultValue, string filePath="")
+    public static string LoadString(string key, string defaultValue, string filePath = "")
     {
         return Load<string>(key, defaultValue, new ES3Settings(filePath));
     }
@@ -690,46 +690,46 @@ public static class ES3
         var newSettings = new ES3Settings(audioFilePath, settings);
 
 #if UNITY_2018_3_OR_NEWER
-        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file://" + newSettings.FullPath, audioType))
+        using (UnityWebRequest UnityWebRequest = UnityWebRequestMultimedia.GetAudioClip("file://" + newSettings.FullPath, audioType))
         {
-            www.SendWebRequest();
+            UnityWebRequest.SendWebRequest();
 
-            while (!www.isDone)
+            while (!UnityWebRequest.isDone)
             {
                 // Wait for it to load.
             }
 
-            if (www.isNetworkError)
-                throw new System.Exception(www.error);
+            if (UnityWebRequest.isNetworkError)
+                throw new System.Exception(UnityWebRequest.error);
             else
-                return DownloadHandlerAudioClip.GetContent(www);
+                return DownloadHandlerAudioClip.GetContent(UnityWebRequest);
         }
 #elif UNITY_2017_1_OR_NEWER
-		WWW www = new WWW(newSettings.FullPath);
+		UnityWebRequest UnityWebRequest = new UnityWebRequest(newSettings.FullPath);
 
-		while(!www.isDone)
+		while(!UnityWebRequest.isDone)
 		{
 		// Wait for it to load.
 		}
 
-		if(!string.IsNullOrEmpty(www.error))
-			throw new System.Exception(www.error);
+		if(!string.IsNullOrEmpty(UnityWebRequest.error))
+			throw new System.Exception(UnityWebRequest.error);
 #else
-		WWW www = new WWW("file://"+newSettings.FullPath);
+		UnityWebRequest UnityWebRequest = new UnityWebRequest("file://"+newSettings.FullPath);
 
-		while(!www.isDone)
+		while(!UnityWebRequest.isDone)
 		{
 			// Wait for it to load.
 		}
 
-		if(!string.IsNullOrEmpty(www.error))
-			throw new System.Exception(www.error);
+		if(!string.IsNullOrEmpty(UnityWebRequest.error))
+			throw new System.Exception(UnityWebRequest.error);
 #endif
 
 #if UNITY_2017_3_OR_NEWER && !UNITY_2018_3_OR_NEWER
-		return www.GetAudioClip(true);
+		return UnityWebRequest.GetAudioClip(true);
 #elif UNITY_5_6_OR_NEWER && !UNITY_2018_3_OR_NEWER
-		return WWWAudioExtensions.GetAudioClip(www);
+		return UnityWebRequestAudioExtensions.GetAudioClip(UnityWebRequest);
 #endif
     }
 
@@ -737,7 +737,7 @@ public static class ES3
 
     #region Serialize/Deserialize
 
-    public static byte[] Serialize<T>(T value, ES3Settings settings=null)
+    public static byte[] Serialize<T>(T value, ES3Settings settings = null)
     {
         if (settings == null) settings = new ES3Settings();
 
@@ -750,7 +750,7 @@ public static class ES3
         }
     }
 
-    public static T Deserialize<T>(byte[] bytes, ES3Settings settings=null)
+    public static T Deserialize<T>(byte[] bytes, ES3Settings settings = null)
     {
         return (T)Deserialize(ES3TypeMgr.GetOrCreateES3Type(typeof(T)), bytes, settings);
     }
@@ -761,8 +761,8 @@ public static class ES3
             settings = new ES3Settings();
 
         using (var ms = new System.IO.MemoryStream(bytes, false))
-            using (var reader = ES3Reader.Create(ms, settings, false))
-                    return reader.Read<object>(type);
+        using (var reader = ES3Reader.Create(ms, settings, false))
+            return reader.Read<object>(type);
     }
 
     public static void DeserializeInto<T>(byte[] bytes, T obj, ES3Settings settings = null) where T : class
@@ -776,8 +776,8 @@ public static class ES3
             settings = new ES3Settings();
 
         using (var ms = new System.IO.MemoryStream(bytes, false))
-            using (var reader = ES3Reader.Create(ms, settings, false))
-                reader.ReadInto<T>(obj, type);
+        using (var reader = ES3Reader.Create(ms, settings, false))
+            reader.ReadInto<T>(obj, type);
     }
 
     #endregion

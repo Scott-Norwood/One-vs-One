@@ -30,14 +30,15 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - NaughtyAttributes.Test
+    - ScriptableObject-Architecture
     - Assembly-CSharp-firstpass
     - MoreMountains.CorgiEngine
     - MeshBakerCore
     - MoreMountains.Tools
     - Cinemachine
-    - Assembly-CSharp
     - MoreMountains.Feedbacks.URP
     - NaughtyAttributes.Core
+    - Assembly-CSharp
     - LeanPool
     - MoreMountains.Feedbacks
     - MoreMountains.InventoryEngine
@@ -51,6 +52,7 @@ MonoBehaviour:
     - MoreMountains.Tools.Cinemachine
     - MoreMountains.Tools.Editor
     - NaughtyAttributes.Editor
+    - ScriptableObject-Architecture.Editor
     - MeshBakerEditor
     - MoreMountains.Feedbacks.Editor
     - MoreMountains.CorgiEngine.Cinemachine.Editor

@@ -56,7 +56,7 @@ if(isset($_POST["getFile"]))
 	if($stmt->rowCount() > 0)
 	{
 		$data = $stmt->fetchColumn();
-		// Manually set the content length so WWW.progress works.
+		// Manually set the content length so UnityWebRequest.progress works.
 		header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
 		header("Cache-Control: public");
 		header("Content-Type: application/octet-stream");

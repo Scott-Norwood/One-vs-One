@@ -9,17 +9,15 @@ using xtilly5000.Prototypes.WaveManager;
 
 public class Main_Shop : MonoBehaviour
 {
-
     [Header("Weapon Shop Buff Stats")]
+    public int PointsCost;
     public int WeaponDamageIncrease;
     public float WeaponSpeedIncrease;
     public float WeaponReloadIncrease;
     public bool WeaponMagazineBased;
-    public float BuffDuration;
 
     [Header("Shop Item Values")]
-    public Button[] buttons;
-
+    public float BuffDuration;
 
     //Hidden Values 
     Canvas mainShopCanvas;
@@ -35,11 +33,6 @@ public class Main_Shop : MonoBehaviour
         currentPoints = GameManager.Instance.Points;
         timerIsRunning = false;
         //mainShopCanvas.enabled = false;
-
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            Debug.Log(buttons[i]);
-        }
     }
 
     void Update()
