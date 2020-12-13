@@ -541,8 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19d3844d1e03b3488a824ef269769a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yourKey: ff3e8a0a5359720c51408eda6074fdec
-  yourToken: 8bff4a808b5a02dc4d347b40f3393413d778c58eb1b3f7afe0d07a2103243f61
+  yourKey: 
+  yourToken: 
   currentBoard: Bring It
   newCardsOnTop: 1
   reportTypes:
