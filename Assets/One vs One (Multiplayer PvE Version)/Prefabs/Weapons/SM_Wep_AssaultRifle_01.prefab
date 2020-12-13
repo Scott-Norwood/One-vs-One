@@ -680,9 +680,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AimControl: 3
   RotationMode: 0
-  WeaponRotationSpeed: 0
-  MinimumAngle: -70
-  MaximumAngle: 70
+  WeaponRotationSpeed: 10
+  MinimumAngle: -45
+  MaximumAngle: 45
   Reticle: {fileID: 0}
   DisplayReticle: 0
   ReticleDistance: 0
@@ -2760,6 +2760,36 @@ MonoBehaviour:
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: -6133774504838754832, guid: bc92ae8dfe5629d469404e44b29eb426,
     type: 2}
+--- !u!1 &8100492061851901065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 932319716864053854}
+  m_Layer: 0
+  m_Name: IKLookAt
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &932319716864053854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8100492061851901065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.235, z: 0.329}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8412326181935704033}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8257010331526592300
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,7 +2804,7 @@ GameObject:
   - component: {fileID: 6349271596517130852}
   m_Layer: 0
   m_Name: Weapon Model
-  m_TagString: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2801,6 +2831,7 @@ Transform:
   - {fileID: 7155893894240566371}
   - {fileID: 6769716587444238878}
   - {fileID: 4586056595756575522}
+  - {fileID: 932319716864053854}
   m_Father: {fileID: 3289292280358038556}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -3635,8 +3666,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
         type: 3}
+      propertyPath: VelocityModule.x.scalar
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.y.scalar
+      value: 1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.z.scalar
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.x.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.y.minScalar
+      value: -1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.z.minScalar
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.inWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.radial.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
       propertyPath: CollisionModule.collisionMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalX.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalY.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalZ.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
         type: 3}
@@ -3662,6 +3753,21 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalOffsetX.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalOffsetY.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
+        type: 3}
+      propertyPath: VelocityModule.orbitalOffsetZ.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198241727305714792, guid: 059c6bc0c88d9e44c98a815958888e74,
         type: 3}
@@ -3991,15 +4097,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acad01ddb4ce10241aacbfb19d253870, type: 3}
---- !u!198 &4428227466727499326 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
-    type: 3}
-  m_PrefabInstance: {fileID: 4962678796403588618}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4586056595756575522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8897433082313299240, guid: acad01ddb4ce10241aacbfb19d253870,
+    type: 3}
+  m_PrefabInstance: {fileID: 4962678796403588618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4428227466727499326 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8767034550079723572, guid: acad01ddb4ce10241aacbfb19d253870,
     type: 3}
   m_PrefabInstance: {fileID: 4962678796403588618}
   m_PrefabAsset: {fileID: 0}
@@ -4255,10 +4361,35 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7902961547855903055, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902961547855903055, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7903050792878878903, guid: 6b8172235a64cba4a9e426f90d9806b7,
         type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903050792878878903, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903050792878878903, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903050792878878903, guid: 6b8172235a64cba4a9e426f90d9806b7,
+        type: 3}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7903232072771450853, guid: 6b8172235a64cba4a9e426f90d9806b7,
         type: 3}
@@ -4402,15 +4533,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b8172235a64cba4a9e426f90d9806b7, type: 3}
---- !u!4 &246294450929678011 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8026237981525096845, guid: 6b8172235a64cba4a9e426f90d9806b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7785016853350125366}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &118251738702690711 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7903239830726719137, guid: 6b8172235a64cba4a9e426f90d9806b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7785016853350125366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &246294450929678011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8026237981525096845, guid: 6b8172235a64cba4a9e426f90d9806b7,
     type: 3}
   m_PrefabInstance: {fileID: 7785016853350125366}
   m_PrefabAsset: {fileID: 0}

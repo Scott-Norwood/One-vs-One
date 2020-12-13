@@ -2,7 +2,7 @@
 
 public class LockAndHideCursor : MonoBehaviour
 {
-    public void HideCursor()
+    public void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;

@@ -10,6 +10,7 @@ TagManager:
   - NoMask
   - Spawner
   - Weapon
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,7 @@ TagManager:
   - Pushables
   - Stairs
   - Weapon_Clickable
-  - 
+  - MouseTarget
   - 
   m_SortingLayers:
   - name: Background

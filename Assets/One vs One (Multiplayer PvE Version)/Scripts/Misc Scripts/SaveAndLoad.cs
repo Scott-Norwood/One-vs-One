@@ -68,9 +68,9 @@ public class SaveAndLoad : MonoBehaviour
 
             yield return delay;
 
-            print("| GamePoints " + GameManager.Instance.Points + " |" +
-            "| GameMaxLives " + GameManager.Instance.MaximumLives + " |" +
-            "| CurrentWaveAttempt " + WaveSpawner.currentAttemptedWave + " |");
+            // print("| GamePoints " + GameManager.Instance.Points + " |" +
+            // "| GameMaxLives " + GameManager.Instance.MaximumLives + " |" +
+            // "| CurrentWaveAttempt " + WaveSpawner.currentAttemptedWave + " |");
         }
     }
 }

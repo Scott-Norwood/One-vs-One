@@ -42,7 +42,6 @@ public class Main_Shop : MonoBehaviour
             if (BuffDuration > 0)
             {
                 BuffDuration -= Time.deltaTime;
-                DisplayTime(BuffDuration);
             }
             else
             {
@@ -113,14 +112,4 @@ public class Main_Shop : MonoBehaviour
     }
 
     #endregion
-
-    void DisplayTime(float timeToDisplay) // Buff Timer, just really generic for now
-    {
-        timeToDisplay += 1;
-
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
-        buffTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
 }

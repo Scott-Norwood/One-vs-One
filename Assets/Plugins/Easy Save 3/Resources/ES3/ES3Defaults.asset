@@ -35,10 +35,11 @@ MonoBehaviour:
     - MoreMountains.CorgiEngine
     - MeshBakerCore
     - MoreMountains.Tools
+    - Assembly-CSharp
     - Cinemachine
     - MoreMountains.Feedbacks.URP
     - NaughtyAttributes.Core
-    - Assembly-CSharp
+    - Player_Scripts
     - LeanPool
     - MoreMountains.Feedbacks
     - MoreMountains.InventoryEngine
