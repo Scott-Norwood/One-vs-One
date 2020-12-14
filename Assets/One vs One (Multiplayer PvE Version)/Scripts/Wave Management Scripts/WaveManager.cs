@@ -278,7 +278,8 @@ namespace xtilly5000.Prototypes.WaveManager
             // Spawn the enemy and save a reference to it for later manipulation by functions subscribed to the event.
             WaveEnemy enemy = new WaveEnemy
             {
-                obj = GameObject.Instantiate(prefabs[id])
+                obj = GameObject.Instantiate(prefabs[id]) // Tilly old spawn method non pooling
+                //obj = Lean.Pool.LeanPool.Spawn(prefabs[id]) // Leanpool updated spawn method
             };
 
             //enemy.obj.transform.position = FindObjectOfType<WaveSpawner>().spawnPoint.transform.position;

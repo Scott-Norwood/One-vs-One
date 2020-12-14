@@ -59,6 +59,9 @@ namespace xtilly5000.Prototypes.WaveManager
             WaveManager.OnWaveStartSpawning += OnWaveStartSpawning;
             WaveManager.OnWaveKilled += OnWaveKilled;
 
+
+            StartWaveTrigger();
+
         }
         #endregion
 
@@ -81,7 +84,7 @@ namespace xtilly5000.Prototypes.WaveManager
                 TimeLeft = 0f;
                 waveKilled = false;
                 StartCoroutine(WaveManager.Instance.SpawnWave(_currentWave));
-                
+
             }
         }
         #endregion

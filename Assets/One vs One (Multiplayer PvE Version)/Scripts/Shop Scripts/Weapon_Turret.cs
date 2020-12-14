@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Weapon_Turret : MonoBehaviour
 {
-    Transform target;
+
+    ///|////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //|| Weapon_Turret Variables
+    ///|////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     [Header("General")]
     public float range = 15f;
     [Header("Unity Setup Fields")]
@@ -12,12 +15,30 @@ public class Weapon_Turret : MonoBehaviour
     public Transform partToRotate;
     public float turnSpeed = 10f;
     public Weapon_Projectile_SO weapon_Projectile_SO;
-    public Transform muzzleEnd;
-    public float rateOfFire;
 
-    // Use this for initialization
+    public float rateOfFire;
+    public AudioSource weaponAudio;
+    public AudioClip weaponAudioClip;
+    public float fireRate = 1f;
+    [Space]
+    [Header("Weapon Parts")]
+    public Transform muzzleEnd;
+    public Transform shellEjection;
+    public Transform weaponBarrel;
+
+
+    ///|////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //|| Private Variables
+    ///|////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Transform target;
+    int projectileVelocity;
+    Rigidbody projectilePrefab;
+    float fireCountdown = 0f;
+
     void Start()
     {
+        //projectileVelocity = weapon_Projectile_SO.projectileVelocity;
+        //projectilePrefab = weapon_Projectile_SO.projectilePrefab;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -48,10 +69,19 @@ public class Weapon_Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LockOnTarget();
         if (target != null)
         {
-            SpawnProjectile();
+            LockOnTarget();
+            if (fireCountdown <= 0f)
+            {
+                SpawnProjectile();
+                WeaponSfx();
+                WeaponMuzzleFlash();
+                WeaponShellEjection();
+                fireCountdown = 1f / fireRate;
+            }
+            RotateBarrel();
+            fireCountdown -= Time.deltaTime;
         }
     }
 
@@ -60,7 +90,7 @@ public class Weapon_Turret : MonoBehaviour
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
     }
 
     private GameObject SpawnProjectile()
@@ -77,12 +107,28 @@ public class Weapon_Turret : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    IEnumerator FullAuto()
+    void WeaponSfx()
     {
-        while (target != null)
-        {
-            SpawnProjectile();
-            yield return new WaitForSeconds(1f / (rateOfFire / 60f));
-        }
+        weaponAudio.PlayOneShot(weapon_Projectile_SO.projectileAudioClip);
     }
+    void WeaponMuzzleFlash()
+    {
+        // #### Implement LeanPool for this ####
+
+        GameObject mF = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileMuzzleFlash, muzzleEnd.position, muzzleEnd.rotation) as GameObject;
+        mF.transform.SetParent(muzzleEnd);
+    }
+
+    void WeaponShellEjection()
+    {
+        // #### Implement LeanPool for this ####
+
+        GameObject sE = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileShellEffect, shellEjection.position, shellEjection.rotation) as GameObject;
+        sE.transform.SetParent(shellEjection);
+    }
+    void RotateBarrel()
+    {
+        weaponBarrel.transform.Rotate(Vector3.forward, 500 * Time.deltaTime);
+    }
+
 }

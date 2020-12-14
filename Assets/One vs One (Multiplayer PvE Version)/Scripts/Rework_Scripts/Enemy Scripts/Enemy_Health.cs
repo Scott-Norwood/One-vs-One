@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Health : MonoBehaviour
+public class Enemy_Health : HealthSystem
 {
-    HealthSystem healthSystem;
-    void Start()
+    //Empty class for the enemy that inherits all of healthsystem, modify it
+
+    void Update()
     {
-        healthSystem = new HealthSystem(100);
-        healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
+        if (GetHealth() == 0)
+        {
+            print("Enemy Killed.");
+            Destroy(gameObject);
+        }
     }
 
-    void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)
+    public override void DecreaseHealth(int damageAmount)
     {
-        Debug.Log(healthSystem.GetHealthPercentage());
+        base.DecreaseHealth(damageAmount);
+    }
+
+    public override int GetHealth()
+    {
+        return base.GetHealth();
     }
 }

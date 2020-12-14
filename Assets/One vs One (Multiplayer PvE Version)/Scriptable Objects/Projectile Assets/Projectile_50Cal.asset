@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 079b8baec5d49fc4b8c12190de9f0961, type: 3}
-  m_Name: Projectile_.30-06 Springfield
+  m_Name: Projectile_50Cal
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6935706113038533295, guid: 0b886129454ab784fa425570c6ee8d8f,
+  projectilePrefab: {fileID: 6935706113038533295, guid: 6b3532263e34fbc4eadd5d0a4e23cacc,
     type: 3}
   projectileVelocity: 890
   projectileDamage: 0
   projectileImpactForce: 0
   isExplosive: 0
   projectileExplosionRadius: 0
-  projectileAudioClip: {fileID: 8300000, guid: 9df8f4f82c5bb46f4af069fed5d4b306, type: 3}
+  projectileAudioClip: {fileID: 8300000, guid: f45c093d67ef642f1914233c5a9f0450, type: 3}
   projectileMuzzleFlash: {fileID: 8417376527421264099, guid: a392bd0c23c79524eb312c7cf7128dd7,
     type: 3}
   projectileShellEffect: {fileID: 1441219844518638, guid: 318a4c64f1fd12a43829eaf9351e7208,

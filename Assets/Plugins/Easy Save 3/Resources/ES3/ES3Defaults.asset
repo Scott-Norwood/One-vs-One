@@ -39,7 +39,6 @@ MonoBehaviour:
     - Cinemachine
     - MoreMountains.Feedbacks.URP
     - NaughtyAttributes.Core
-    - Player_Scripts
     - LeanPool
     - MoreMountains.Feedbacks
     - MoreMountains.InventoryEngine
