@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: -5640504194733352171}
   - component: {fileID: 2058611956455103753}
   m_Layer: 0
-  m_Name: Ammo_50Cal
+  m_Name: Ammo_30-06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219f23b3f5372e6458328982d3a9e101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon_Projectile_SO: {fileID: 11400000, guid: 72114be0137a35645864d5e0b114c23d,
+    type: 2}
 --- !u!1001 &6155823335093277491
 PrefabInstance:
   m_ObjectHideFlags: 0

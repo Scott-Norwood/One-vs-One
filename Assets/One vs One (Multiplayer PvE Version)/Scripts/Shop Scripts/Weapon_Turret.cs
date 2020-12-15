@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using xtilly5000.Prototypes.RecoilManager;
 
 public class Weapon_Turret : MonoBehaviour
 {
@@ -34,12 +35,16 @@ public class Weapon_Turret : MonoBehaviour
     int projectileVelocity;
     Rigidbody projectilePrefab;
     float fireCountdown = 0f;
+    float zRot;
+    bool noTarget;
 
     void Start()
     {
         //projectileVelocity = weapon_Projectile_SO.projectileVelocity;
         //projectilePrefab = weapon_Projectile_SO.projectilePrefab;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        zRot = transform.eulerAngles.z;
+        noTarget = true;
     }
 
     void UpdateTarget()
@@ -72,6 +77,7 @@ public class Weapon_Turret : MonoBehaviour
         if (target != null)
         {
             LockOnTarget();
+            noTarget = false;
             if (fireCountdown <= 0f)
             {
                 SpawnProjectile();
@@ -83,12 +89,18 @@ public class Weapon_Turret : MonoBehaviour
             RotateBarrel();
             fireCountdown -= Time.deltaTime;
         }
+        else
+        {
+            noTarget = true;
+        }
     }
 
     void LockOnTarget()
     {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
+        lookRotation = lookRotation * Quaternion.AngleAxis(zRot + 180, new Vector3(0, 0, 1));
+
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
     }
@@ -109,26 +121,37 @@ public class Weapon_Turret : MonoBehaviour
 
     void WeaponSfx()
     {
-        weaponAudio.PlayOneShot(weapon_Projectile_SO.projectileAudioClip);
+        if (weapon_Projectile_SO.projectileAudioClip != null)
+        {
+            weaponAudio.PlayOneShot(weapon_Projectile_SO.projectileAudioClip);
+        }
     }
+
     void WeaponMuzzleFlash()
     {
         // #### Implement LeanPool for this ####
-
-        GameObject mF = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileMuzzleFlash, muzzleEnd.position, muzzleEnd.rotation) as GameObject;
-        mF.transform.SetParent(muzzleEnd);
+        if (weapon_Projectile_SO.projectileMuzzleFlash != null && noTarget == false)
+        {
+            GameObject mF = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileMuzzleFlash, muzzleEnd.position, muzzleEnd.rotation) as GameObject;
+            mF.transform.SetParent(muzzleEnd);
+        }
     }
 
     void WeaponShellEjection()
     {
         // #### Implement LeanPool for this ####
-
-        GameObject sE = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileShellEffect, shellEjection.position, shellEjection.rotation) as GameObject;
-        sE.transform.SetParent(shellEjection);
+        if (weapon_Projectile_SO.projectileShellEffect != null)
+        {
+            GameObject sE = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectileShellEffect, shellEjection.position, shellEjection.rotation) as GameObject;
+            sE.transform.SetParent(shellEjection);
+        }
     }
     void RotateBarrel()
     {
-        weaponBarrel.transform.Rotate(Vector3.forward, 500 * Time.deltaTime);
+        if (weaponBarrel != null)
+        {
+            weaponBarrel.transform.Rotate(Vector3.forward, 500 * Time.deltaTime);
+        }
     }
 
 }

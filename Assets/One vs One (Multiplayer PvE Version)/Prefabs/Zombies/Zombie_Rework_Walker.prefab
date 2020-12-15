@@ -1166,6 +1166,7 @@ GameObject:
   - component: {fileID: 6554359727206435297}
   - component: {fileID: 6554359727206435296}
   - component: {fileID: 9051471068882179719}
+  - component: {fileID: 8077778336023404083}
   m_Layer: 13
   m_Name: Zombie_Rework_Walker
   m_TagString: Enemy
@@ -1258,6 +1259,21 @@ MonoBehaviour:
   actionDistanceMax: 10
   jumpAngleMin: 10
   jumpAngleMax: 75
+--- !u!114 &8077778336023404083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554359727206435310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69592c44a82835e40be135e225367b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 5000
+  storedCurrency: 0
+  maxCurrency: 999999
 --- !u!1 &6554360546871873972
 GameObject:
   m_ObjectHideFlags: 0

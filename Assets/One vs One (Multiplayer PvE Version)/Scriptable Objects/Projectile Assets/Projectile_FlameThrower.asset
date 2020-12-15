@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 079b8baec5d49fc4b8c12190de9f0961, type: 3}
-  m_Name: Projectile_.30-06 Springfield
+  m_Name: Projectile_FlameThrower
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6935706113038533295, guid: 0b886129454ab784fa425570c6ee8d8f,
+  projectilePrefab: {fileID: 7805557799316997488, guid: aecc85afe5917ef4e94bba08ecf15565,
     type: 3}
-  projectileVelocity: 890
-  projectileDamage: 5
+  projectileVelocity: 360
+  projectileDamage: 1
   projectileImpactForce: 0
   isExplosive: 0
   projectileExplosionRadius: 0
-  projectileAudioClip: {fileID: 8300000, guid: 9df8f4f82c5bb46f4af069fed5d4b306, type: 3}
-  projectileMuzzleFlash: {fileID: 8417376527421264099, guid: a392bd0c23c79524eb312c7cf7128dd7,
+  projectileAudioClip: {fileID: 0}
+  projectileMuzzleFlash: {fileID: 1653619026499950, guid: ef4d31ab810a39b499877583c1f6a865,
     type: 3}
-  projectileShellEffect: {fileID: 1441219844518638, guid: 318a4c64f1fd12a43829eaf9351e7208,
-    type: 3}
+  projectileShellEffect: {fileID: 0}

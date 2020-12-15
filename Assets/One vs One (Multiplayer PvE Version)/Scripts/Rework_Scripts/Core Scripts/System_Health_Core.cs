@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-public class HealthSystem : MonoBehaviour
+public class System_Health_Core : MonoBehaviour
 {
     public int healthMax;
     public int health;

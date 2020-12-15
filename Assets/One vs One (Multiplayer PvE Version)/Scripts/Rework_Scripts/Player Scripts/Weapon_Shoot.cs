@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Lean.Pool;
+using xtilly5000.Prototypes.RecoilManager;
 
 public enum FireSelect
 {
@@ -32,22 +33,12 @@ public class Weapon_Shoot : MonoBehaviour
     [Header("Weapon SFX")]
     public AudioSource weaponAudio;
 
-    [Space]
-    [Header("Recoil Settings")]
-    public Vector2 kickMinMax = new Vector2(.05f, .2f);
-    public Vector2 recoilAngleMinMax = new Vector2(3, 5);
-    public float recoilMoveSettleTime = .1f;
-    public float recoilRotationSettleTime = .1f;
-    //float recoilAngle;
-    Vector3 gunStartingPosition;
-    Vector3 recoilSmoothDampVelocity;
-    Weapon_Aim aimScript;
+    private System_Recoil_Core recoilManager;
+    private bool inBurst;
 
-    void Start()
+    private void Start()
     {
-        gunStartingPosition = transform.localPosition;
-        aimScript = GetComponent<Weapon_Aim>();
-        print(1f / (rateOfFire / 60f));
+        recoilManager = gameObject.GetComponent<System_Recoil_Core>();
     }
 
     void Update()
@@ -59,7 +50,7 @@ public class Weapon_Shoot : MonoBehaviour
             {
                 SingleFire();
             }
-            if (_fireselect == FireSelect.BurstFire)
+            if (_fireselect == FireSelect.BurstFire && !inBurst)
             {
                 StartCoroutine(BurstFire());
             }
@@ -72,18 +63,6 @@ public class Weapon_Shoot : MonoBehaviour
         {
             //recoilAngle = 0;
         }
-    }
-    void LateUpdate()
-    {
-        // animate recoil
-        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, gunStartingPosition, ref recoilSmoothDampVelocity, recoilMoveSettleTime);
-    }
-    void RecoilStart()
-    {
-        transform.position += transform.TransformDirection(Vector3.back) * Random.Range(kickMinMax.x, kickMinMax.y);
-
-        //aimScript.targetAngle = aimScript.mouseAngle + Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
-        aimScript.gameObject.transform.eulerAngles = new Vector3(aimScript.gameObject.transform.eulerAngles.x - Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y), aimScript.gameObject.transform.eulerAngles.y, aimScript.gameObject.transform.eulerAngles.z);
     }
 
     void WeaponMuzzleFlash()
@@ -109,7 +88,7 @@ public class Weapon_Shoot : MonoBehaviour
     private GameObject SpawnProjectile()
     {
         Rigidbody projectileInstance;
-        projectileInstance = Lean.Pool.LeanPool.Spawn(weapon_Projectile_SO.projectilePrefab, muzzleEnd.position, muzzleEnd.rotation) as Rigidbody;
+        projectileInstance = Instantiate(weapon_Projectile_SO.projectilePrefab, muzzleEnd.position, muzzleEnd.rotation) as Rigidbody;
         projectileInstance.AddForce(muzzleEnd.forward * weapon_Projectile_SO.projectileVelocity);
         return projectileInstance.gameObject;
     }
@@ -120,21 +99,24 @@ public class Weapon_Shoot : MonoBehaviour
         WeaponMuzzleFlash();
         WeaponShellEjection();
         WeaponSfx();
-        RecoilStart();
+        recoilManager.Recoil();
         print(_fireselect);
     }
 
     public virtual IEnumerator BurstFire()
     {
+        inBurst = true;
         int _roundsLeftInBurst = roundsInBurst;
         while (_roundsLeftInBurst > 0)
         {
             SingleFire();
-            RecoilStart();
+            recoilManager.Recoil();
             _roundsLeftInBurst--;
             print(_fireselect);
             yield return new WaitForSeconds(1f / (rateOfFire / 60f));
         }
+        yield return new WaitForSeconds(1f / (rateOfFire / 60f));
+        inBurst = false;
     }
 
     public virtual IEnumerator FullAuto()
@@ -142,7 +124,7 @@ public class Weapon_Shoot : MonoBehaviour
         while (Input.GetKey(fireInput))
         {
             SingleFire();
-            RecoilStart();
+            recoilManager.Recoil();
             print(_fireselect);
             yield return new WaitForSeconds(1f / (rateOfFire / 60f));
         }
