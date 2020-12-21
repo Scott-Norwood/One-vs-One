@@ -96,7 +96,7 @@ namespace ES3Internal
 #if UNITY_5
 			if(webRequest.isError)
 #else
-            if (webRequest.isNetworkError) // isError was renamed to isNetworkError in Unity 2017.
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError) // isError was renamed to isNetworkError in Unity 2017.
 #endif
             {
                 errorCode = 1;

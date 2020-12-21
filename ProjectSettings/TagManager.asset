@@ -10,7 +10,12 @@ TagManager:
   - NoMask
   - Spawner
   - Weapon
+  - Enemy_Head
+  - Enemy_Body
+  - Enemy_Base
   - Enemy
+  - Projectile
+  - Grenade
   layers:
   - Default
   - TransparentFX
@@ -18,31 +23,31 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - Platforms
   - Player
-  - Volumes
-  - OneWayPlatforms
   - Projectiles
   - Enemies
-  - LevelBounds
-  - Ladders
-  - PlayerProjectiles
-  - MovingObjects
-  - MovingPlatforms
-  - Foreground
-  - MovingOneWayPlatforms
-  - NoCollision
-  - Background
-  - Friendlies
-  - Invulnerable
-  - PlatformsPlayerOnly
-  - MidHeightOneWayPlatforms
-  - Pushables
-  - Stairs
-  - Weapon_Clickable
-  - MouseTarget
+  - Grenade
+  - Enemy_Base
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   m_SortingLayers:
   - name: Background

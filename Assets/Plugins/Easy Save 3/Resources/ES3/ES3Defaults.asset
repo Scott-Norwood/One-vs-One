@@ -29,35 +29,13 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - NaughtyAttributes.Test
-    - Assembly-CSharp-firstpass
-    - MoreMountains.CorgiEngine
     - MeshBakerCore
-    - MoreMountains.Tools
+    - Assembly-CSharp-firstpass
     - Assembly-CSharp
     - Cinemachine
-    - MoreMountains.Feedbacks.URP
-    - NaughtyAttributes.Core
-    - LeanPool
-    - MoreMountains.Feedbacks
-    - MoreMountains.InventoryEngine
-    - MoreMountains.Feedbacks.MMTools
-    - MoreMountains.InventoryEngine.Demos
-    - MoreMountains.Interface
-    - MoreMountains.Feedbacks.Cinemachine
     - LeanCommon
-    - MoreMountains.Tools.Feedbacks
-    - MoreMountains.CorgiEngine.Cinemachine
-    - MoreMountains.Tools.Cinemachine
-    - MoreMountains.Tools.Editor
-    - NaughtyAttributes.Editor
+    - LeanPool
     - MeshBakerEditor
-    - MoreMountains.Feedbacks.Editor
-    - MoreMountains.CorgiEngine.Cinemachine.Editor
-    - MoreMountains.InventoryEngine.Editor
-    - MoreMountains.Interface.Editor
-    - MoreMountains.CorgiEngine.Editor
-    - MoreMountains.Tools.Feedbacks.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

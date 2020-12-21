@@ -6,14 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/One vs One (Multiplayer PvE Version)/Scenes/MainMenu_01.unity
-    guid: ed9552b788a96034fa880f39d8dcd2da
-  - enabled: 1
-    path: Assets/One vs One (Multiplayer PvE Version)/Asset Packages/CorgiEngine/ThirdParty/MoreMountains/MMTools/Tools/SceneLoading/LoadingScreen.unity
-    guid: 888394d52616e5e42b3b54c3f2bbd3eb
-  - enabled: 1
-    path: Assets/One vs One (Multiplayer PvE Version)/Scenes/DemoScene_01.unity
-    guid: 197daee316f48be4d86a5c442b17b70d
+    path: Assets/One vs One (Multiplayer PvE Version)/Scenes/WeaponTest.unity
+    guid: 012424a5477a0dd45bd5061337808568
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3a76c95cb91c9734c914009392f81b32,
       type: 2}

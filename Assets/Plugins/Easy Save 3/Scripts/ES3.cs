@@ -699,7 +699,7 @@ public static class ES3
                 // Wait for it to load.
             }
 
-            if (UnityWebRequest.isNetworkError)
+            if (UnityWebRequest.result == UnityWebRequest.Result.ConnectionError)
                 throw new System.Exception(UnityWebRequest.error);
             else
                 return DownloadHandlerAudioClip.GetContent(UnityWebRequest);
