@@ -45,16 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c25e65baa963da4087186190863e32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 23.65
-  enemyTag: Enemy
+  range: 10
+  enemyTag: Enemy_Base
   partToRotate: {fileID: 3573379252805851291}
   turnSpeed: 50
   weapon_Projectile_SO: {fileID: 11400000, guid: 9f4712a5f20bf3649b447a1110e36e01,
     type: 2}
-  rateOfFire: 0
   weaponAudio: {fileID: 3573379251229268307}
   weaponAudioClip: {fileID: 8300000, guid: f45c093d67ef642f1914233c5a9f0450, type: 3}
-  fireRate: 10
+  fireRate: 350
   muzzleEnd: {fileID: 3573379252743324692}
   shellEjection: {fileID: 3573379251874151778}
   weaponBarrel: {fileID: 3573379251854707562}
@@ -67,7 +66,8 @@ AudioSource:
   m_GameObject: {fileID: 3573379251229268302}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6133774504838754832, guid: bc92ae8dfe5629d469404e44b29eb426,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -321,7 +321,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3573379252805851288}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -330,7 +330,7 @@ Transform:
   - {fileID: 3573379252932045641}
   m_Father: {fileID: 3573379251229268304}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &3573379252805851293
 MeshFilter:
   m_ObjectHideFlags: 0

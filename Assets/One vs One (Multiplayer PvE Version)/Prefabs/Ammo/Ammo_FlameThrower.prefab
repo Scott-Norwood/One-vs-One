@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 8913320156165364140}
   - component: {fileID: 7805557799316997488}
   - component: {fileID: -5916035434535176646}
-  - component: {fileID: 2137819383159059140}
   - component: {fileID: 7567598816254886927}
   m_Layer: 0
   m_Name: Ammo_FlameThrower
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,18 +63,6 @@ CapsuleCollider:
   m_Height: 0.10003953
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.002348803}
---- !u!114 &2137819383159059140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064876912895314360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47bac80a21a18b4b91b990df1cb4e7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7567598816254886927
 MonoBehaviour:
   m_ObjectHideFlags: 0

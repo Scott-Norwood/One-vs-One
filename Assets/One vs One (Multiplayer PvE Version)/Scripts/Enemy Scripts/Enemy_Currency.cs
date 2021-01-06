@@ -7,11 +7,11 @@ public class Enemy_Currency : MonoBehaviour
     public void HeadShot(int headshotValue)
     {
         enemyValue = headshotValue;
-        Debug.Log(enemyValue);
+        //Debug.Log(enemyValue);
     }
     public void BodyShot(int bodyshotValue)
     {
         enemyValue = bodyshotValue;
-        Debug.Log(enemyValue);
+        //Debug.Log(enemyValue);
     }
 }

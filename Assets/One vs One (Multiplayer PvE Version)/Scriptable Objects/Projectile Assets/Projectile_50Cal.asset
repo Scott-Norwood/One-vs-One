@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6935706113038533295, guid: 6b3532263e34fbc4eadd5d0a4e23cacc,
     type: 3}
-  projectileVelocity: 890
-  projectileDamage: 0
+  projectileVelocity: 1000
+  projectileDamage: 1
   projectileImpactForce: 0
   isExplosive: 0
   projectileExplosionRadius: 0

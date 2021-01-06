@@ -16,8 +16,12 @@ public class Enemy_AI : MonoBehaviour
     public int actionDistanceMax;
     [Space]
     [Header("Jump Angle")]
+    public bool canJump = false;
     public int jumpAngleMin;
     public int jumpAngleMax;
+    [Space]
+    [Header("Attack Values")]
+    public int attackDamage;
 
     ///|////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //|| Private Variables
@@ -32,6 +36,7 @@ public class Enemy_AI : MonoBehaviour
     Transform startingPosition;
     Rigidbody selfRb;
     Enemy_Health enemy_Health;
+    Animator animator;
 
     void Awake()
     {
@@ -44,7 +49,7 @@ public class Enemy_AI : MonoBehaviour
         randomNumber = Random.Range(actionDistanceMin, actionDistanceMax);
         initialAngle = Random.Range(jumpAngleMin, jumpAngleMax);
         enemy_Health = GetComponent<Enemy_Health>();
-        Debug.Log("Action Distance: " + randomNumber + " | Jump Angle: " + initialAngle);
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -54,11 +59,12 @@ public class Enemy_AI : MonoBehaviour
             DistanceToTarget();
             SeekTarget();
 
-            if ((int)targetDistance == randomNumber)
+            if ((int)targetDistance == randomNumber && canJump)
             {
                 JumpToTarget();
                 isMoving = false;
-                //isJumping = true;
+                isJumping = true;
+                animator.Play("ZombieJump", 0);
             }
         }
     }
@@ -109,7 +115,7 @@ public class Enemy_AI : MonoBehaviour
 
     void OnCollisionEnter(Collision other) // Quick and dirty for testing, move to Enemy_Health when done testing.
     {
-        if (other.collider.tag == "Player" || other.collider.tag == "LevelBounds")
+        if (other.collider.tag == "LevelBounds")
         {
             enemy_Health.DecreaseHealth(100);
         }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440a3317f955e3f41ad17b738cb316f5, type: 3}
+  m_Name: Wave 7
+  m_EditorClassIdentifier: 
+  steps:
+  - maxTimeUntilNextStep: 0
+    minTimeUntilNextStep: 0
+    minSpacing: 1.5
+    maxSpacing: 1
+    waitUntilKill: 0
+    id: 0
+    maxNumberOfEnemies: 18
+    minNumberOfEnemies: 12
+    skipChance: 25
+    isAdvanced: 1
+  - maxTimeUntilNextStep: 1
+    minTimeUntilNextStep: 1
+    minSpacing: 2
+    maxSpacing: 1.5
+    waitUntilKill: 0
+    id: 1
+    maxNumberOfEnemies: 8
+    minNumberOfEnemies: 5
+    skipChance: 0
+    isAdvanced: 1

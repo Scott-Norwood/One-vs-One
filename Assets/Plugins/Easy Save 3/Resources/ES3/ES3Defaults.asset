@@ -30,12 +30,15 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - MeshBakerCore
-    - Assembly-CSharp-firstpass
     - Assembly-CSharp
+    - Assembly-CSharp-firstpass
     - Cinemachine
     - LeanCommon
     - LeanPool
+    - Sirenix.OdinInspector.CompatibilityLayer
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - MeshBakerEditor
+    - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivateMenu : MonoBehaviour
 {
     public KeyCode input;
-    public GameObject menuTab;
-    //public AudioSource menuOpeningSound;
+    public GameObject mainMenuTab;
+    public GameObject escapeMenu;
 
     void Start()
     {
-        menuTab.SetActive(false);
+        mainMenuTab.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(input))
+        if (Input.GetKeyDown(input) && !escapeMenu.activeSelf)
         {
-            menuTab.SetActive(!menuTab.activeSelf);
-            Cursor.lockState = CursorLockMode.None;
+            mainMenuTab.SetActive(!mainMenuTab.activeSelf);
+            PauseManager.pauseManager.isPaused = !PauseManager.pauseManager.isPaused;
         }
     }
 }

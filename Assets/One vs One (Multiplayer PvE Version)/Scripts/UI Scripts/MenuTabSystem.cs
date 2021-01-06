@@ -17,9 +17,4 @@ public class MenuTabSystem : MonoBehaviour
         TabSystem.SetActive(false);
         mainTab.SetActive(true);
     }
-    public void ClickedDebug()
-    {
-        Debug.Log("Clicked");
-    }
-
 }

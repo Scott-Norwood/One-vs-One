@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7805557799316997488, guid: aecc85afe5917ef4e94bba08ecf15565,
     type: 3}
-  projectileVelocity: 360
+  projectileVelocity: 1000
   projectileDamage: 1
   projectileImpactForce: 0
   isExplosive: 0
   projectileExplosionRadius: 0
   projectileAudioClip: {fileID: 0}
-  projectileMuzzleFlash: {fileID: 1653619026499950, guid: ef4d31ab810a39b499877583c1f6a865,
+  projectileMuzzleFlash: {fileID: 5498325870557180919, guid: 331112423ef363d449931466a775e3dd,
     type: 3}
   projectileShellEffect: {fileID: 0}

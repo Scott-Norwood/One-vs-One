@@ -4,43 +4,55 @@ using UnityEngine;
 public class Player_Grenade : MonoBehaviour
 {
     public Rigidbody[] grenade;
-    int grenadeSlotNumber;
+    [SerializeField] [ReadOnly] int grenadeSlotNumber;
+    [SerializeField] [ReadOnly] int grenadeInventoryCount;
     public Transform grenadeSpawnPoint;
     public int power;
     public Transform grenadeTargetDistance;
     public float grenadeTargetMoveSpeed = 2f;
+    public float maxGrenadeThrow;
     Vector3 grenadeTargetDistanceStartPos;
     [SerializeField] [ReadOnly] float targetDistance;
     Vector3 originalScale;
 
-    void Start() { grenadeTargetDistanceStartPos = grenadeTargetDistance.position; grenadeSlotNumber = 0; originalScale = grenadeTargetDistance.localScale; }
+    void Start() { grenadeTargetDistanceStartPos = grenadeTargetDistance.position; grenadeSlotNumber = 0; grenadeInventoryCount = 0; originalScale = grenadeTargetDistance.localScale; }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && grenadeSlotNumber > 0 /* && grenadeInventoryCount > 0 */) // Always keep element 0 empty
         {
             grenadeTargetDistance.gameObject.SetActive(true);
             DistanceToTarget();
-            if (targetDistance >= 6) { return; }
+            if (targetDistance >= maxGrenadeThrow) { return; }
             else { StartCoroutine(ChargeToToss()); }
         }
         else
         {
             grenadeTargetDistance.gameObject.SetActive(false);
         }
-        if (Input.GetKeyUp(KeyCode.Space)) { SpawnGrenade(); grenadeTargetDistance.position = grenadeTargetDistanceStartPos; }
+        if (Input.GetKeyUp(KeyCode.Space) && grenadeSlotNumber > 0 /* && grenadeInventoryCount > 0 */)
+        {
+            SpawnGrenade();
+            grenadeInventoryCount--;
+            grenadeTargetDistance.position = grenadeTargetDistanceStartPos;
+        }
     }
 
     IEnumerator ChargeToToss()
     {
-        grenadeTargetDistance.transform.localScale = originalScale * grenade[grenadeSlotNumber].gameObject.GetComponent<GrenadeExplosion>().radius;
-        grenadeTargetDistance.transform.localScale = new Vector3(grenadeTargetDistance.transform.localScale.x, originalScale.y, grenadeTargetDistance.transform.localScale.z);
+        grenadeTargetDistance.transform.localScale = originalScale * grenade[grenadeSlotNumber].gameObject.GetComponent<GrenadeExplosion>().explosionRadius;
+        grenadeTargetDistance.transform.localScale = new Vector3(grenadeTargetDistance.transform.localScale.x, grenadeTargetDistance.transform.localScale.y, grenadeTargetDistance.transform.localScale.z);
         grenadeTargetDistance.transform.Translate(Vector3.right * grenadeTargetMoveSpeed * Time.deltaTime);
         yield return new WaitForSecondsRealtime(.25f);
     }
     public void SetGrenadeNumber(int slotnumber)
     {
         grenadeSlotNumber = slotnumber;
+        //grenadeInventoryCount++; Implement after testing, once the player clicks the buy button, add 1 or X to his player.
+    }
+    public void SetGrenadeInventoryCount(int grenadeCount) // Delete after testing, this gives X amount of grenades
+    {
+        //grenadeInventoryCount = grenadeCount;
     }
 
     void SpawnGrenade()

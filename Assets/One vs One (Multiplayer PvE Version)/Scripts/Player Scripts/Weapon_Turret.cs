@@ -15,7 +15,6 @@ public class Weapon_Turret : MonoBehaviour
     public Transform partToRotate;
     public float turnSpeed = 10f;
     public Weapon_Projectile_SO weapon_Projectile_SO;
-    public float rateOfFire;
     public AudioSource weaponAudio;
     public AudioClip weaponAudioClip;
     public float fireRate = 1f;
@@ -56,7 +55,7 @@ public class Weapon_Turret : MonoBehaviour
                 WeaponSfx();
                 WeaponMuzzleFlash();
                 WeaponShellEjection();
-                fireCountdown = 1f / fireRate;
+                fireCountdown = 1f / (fireRate / 60f);
             }
             RotateBarrel();
             fireCountdown -= Time.deltaTime;
@@ -90,7 +89,7 @@ public class Weapon_Turret : MonoBehaviour
     void LockOnTarget()
     {
         Vector3 dir = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Quaternion lookRotation = Quaternion.LookRotation(dir + new Vector3(0, 1, 0));
         //lookRotation = lookRotation * Quaternion.AngleAxis(zRot + 180, new Vector3(0, 0, 1));
         lookRotation = lookRotation * Quaternion.AngleAxis(zRot, new Vector3(0, 0, 1));
 

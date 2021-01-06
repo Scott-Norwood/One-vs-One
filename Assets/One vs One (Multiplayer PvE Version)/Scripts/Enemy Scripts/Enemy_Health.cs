@@ -26,14 +26,20 @@ public class Enemy_Health : System_Health_Core
         {
             if (GetHealth() == 0)
             {
-                print("Enemy Killed.");
                 player_Currency.IncreasePoints(enemy_Currency.enemyValue);
                 enemy.enabled = false;
                 ragdollController.ActivateRagdoll();
-                //Destroy(gameObject);
                 StartCoroutine(WaitToDespawn());
                 hasDied = true;
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            StartCoroutine(WaitForPlayerHealthCheck());
         }
     }
 
@@ -41,5 +47,10 @@ public class Enemy_Health : System_Health_Core
     {
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
+    }
+    IEnumerator WaitForPlayerHealthCheck()
+    {
+        yield return new WaitForEndOfFrame();
+        DecreaseHealth(100);
     }
 }

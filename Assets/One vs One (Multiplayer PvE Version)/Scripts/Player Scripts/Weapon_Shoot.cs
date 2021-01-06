@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using xtilly5000.Prototypes.RecoilManager;
 using GD.MinMaxSlider;
-using TMPro;
 
 public enum FireSelect
 {
@@ -38,45 +37,20 @@ public class Weapon_Shoot : MonoBehaviour
     [Space]
     [Header("MenuUI")]
     public ActivateMenu menuUiActivate; //Quick and dirty way to do this, reimplement later
+    public ExitGame exitGame;
 
     private System_Recoil_Core recoilManager;
     private bool inBurst;
-    [Space]
-    [Header("For Testing Only")]
-    public KeyCode debugMenu;
-    public bool testMode;
-    public GameObject debugCanvas;
-    public TMP_Text burstText;
-    public TMP_Text roundsFiredText;
-    public TMP_Text roundsOnTargetText;
-    [ReadOnly] public int roundsOnTarget;
-    [SerializeField] [ReadOnly] int roundsFired;
 
     private void Start()
     {
         recoilManager = gameObject.GetComponent<System_Recoil_Core>();
-        burstText.text = roundsInBurst.ToString();
-        roundsFiredText.text = roundsFired.ToString();
-        roundsOnTargetText.text = roundsOnTarget.ToString();
     }
 
     void Update()
     {
-        if (testMode == true)
-        {
-            debugCanvas.SetActive(true);
-        }
-        else
-        {
-            debugCanvas.SetActive(false);
-        }
 
-        if (!menuUiActivate.menuTab.activeSelf)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
-        if (Input.GetKeyDown(fireInput) && !menuUiActivate.menuTab.activeSelf) //Goes along with the quick and dirty comment above
+        if (Input.GetKeyDown(fireInput) && !menuUiActivate.mainMenuTab.activeSelf && !exitGame.exitConfirmation.activeSelf) //Goes along with the quick and dirty comment above
         {
             //##### Firemodes #####
             if (_fireselect == FireSelect.SingleFire)
@@ -92,7 +66,6 @@ public class Weapon_Shoot : MonoBehaviour
                 StartCoroutine(FullAuto());
             }
         }
-        roundsOnTargetText.text = roundsOnTarget.ToString();
     }
 
     void WeaponMuzzleFlash()
@@ -130,9 +103,6 @@ public class Weapon_Shoot : MonoBehaviour
         WeaponShellEjection();
         WeaponSfx();
         recoilManager.Recoil();
-        print(_fireselect);
-        roundsFired++;
-        roundsFiredText.text = roundsFired.ToString();
     }
 
     public virtual IEnumerator BurstFire()
@@ -144,16 +114,9 @@ public class Weapon_Shoot : MonoBehaviour
             SingleFire();
             recoilManager.Recoil();
             _roundsLeftInBurst--;
-            print(_fireselect);
             yield return new WaitForSeconds(1f / (rateOfFire / 60f));
         }
         yield return new WaitForSeconds(1f / (rateOfFire / 60f));
-        if (testMode == true)
-        {
-            //roundsInBurst++;
-        }
-
-        burstText.text = roundsInBurst.ToString();
         inBurst = false;
     }
 
@@ -163,7 +126,6 @@ public class Weapon_Shoot : MonoBehaviour
         {
             SingleFire();
             recoilManager.Recoil();
-            print(_fireselect);
             yield return new WaitForSeconds(1f / (rateOfFire / 60f));
         }
     }
