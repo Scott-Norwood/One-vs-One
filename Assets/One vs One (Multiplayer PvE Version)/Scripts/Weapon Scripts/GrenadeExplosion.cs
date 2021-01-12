@@ -3,69 +3,8 @@ using UnityEngine;
 
 public class GrenadeExplosion : MonoBehaviour
 {
-    public ParticleSystem particleEffect;
-    public ParticleSystem fireGroundEffect;
+    public GrenadeSO grenade;
     public AudioSource audioSource;
-    public int grenadeDamage = 10;
-    public int grenadeForce = 10;
-    public int explosionRadius = 5;
-    public int upwardExplosionForce = 2;
-    public float fuseTime;
-    public float impulseForce;
-    public bool isBitchFragGrenade = false; //! Implement enum for this
-    public bool isFireGrenade = false; //! Implement enum for this
-    public bool isImplosionGrenade = false; //! Implement enum for this
-    public bool isAntigravityGrenade = false; //! Implement enum for this
-
-    void ExplosionBlast()
-    {
-        Vector3 explosionPosition = gameObject.transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
-        foreach (Collider hit in colliders)
-        {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-            //* Frag Grenade
-            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && isBitchFragGrenade)
-            {
-                rb.AddExplosionForce(grenadeForce, explosionPosition, explosionRadius, upwardExplosionForce, ForceMode.Impulse);
-            }
-
-            //* Implosion Grenade
-            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && isImplosionGrenade)
-            {
-                grenadeDamage = 0;
-                rb.isKinematic = false;
-                rb.useGravity = false;
-                Vector3 offset = rb.transform.position - transform.position;
-                rb.AddForce(-offset * impulseForce);
-            }
-
-            //* Antigravity Grenade
-            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && isAntigravityGrenade)
-            {
-                grenadeDamage = 0;
-                rb.isKinematic = false;
-                rb.useGravity = false;
-                rb.AddForce(Vector3.up * 500f);
-            }
-        }
-    }
-
-    void ExplosionDamage()
-    {
-        Vector3 explosionPosition = gameObject.transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPosition, explosionRadius);
-        foreach (Collider hit in colliders)
-        {
-            Enemy_Health enemy_Health = hit.GetComponent<Enemy_Health>();
-            if (enemy_Health != null)
-            {
-                enemy_Health.DecreaseHealth(grenadeDamage);
-            }
-        }
-    }
-
     bool hasHitSomething = false;
     void OnCollisionEnter(Collision other)
     {
@@ -76,33 +15,158 @@ public class GrenadeExplosion : MonoBehaviour
 
         if (!hasHitSomething)
         {
-            StartCoroutine(ExplosionTimer());
+            if (grenade.grenadeType == GrenadeType.FragGrenade) StartCoroutine(ExplosionTimer());
+            if (grenade.grenadeType == GrenadeType.ImplosionGrenade) StartCoroutine(WaitForRagdollPhysics());
+            if (grenade.grenadeType == GrenadeType.AntigravityGrenade) StartCoroutine(WaitForRagdollPhysics());
             hasHitSomething = true;
         }
-        if (isFireGrenade) //! Old method, but it works.
+        if (grenade.grenadeType == GrenadeType.FireGrenade) //! Old method, but it works.
         {
-#pragma warning disable
-            fireGroundEffect.playOnAwake = true;
-#pragma warning enable
-            Instantiate(fireGroundEffect, gameObject.transform.position, Quaternion.identity);
+            Instantiate(grenade.explosionEffect, gameObject.transform.position, Quaternion.identity);
+            Instantiate(grenade.groundEffect, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject, 3f);
+        }
+    }
+
+    void BitchFragExplosionEffect()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            RagdollController ragdoll = hit.GetComponentInChildren<RagdollController>();
+
+            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && grenade.grenadeType == GrenadeType.FragGrenade)
+            {
+                rb.AddExplosionForce(grenade.grenadeForce, explosionPosition, grenade.explosionRadius, grenade.upwardExplosionForce, ForceMode.Impulse);
+            }
+        }
+    }
+
+    void BitchFragGrenade()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Enemy_Health enemy_Health = hit.GetComponent<Enemy_Health>();
+
+            if (enemy_Health != null && grenade.grenadeType == GrenadeType.FragGrenade)
+            {
+                enemy_Health.DecreaseHealth(grenade.grenadeDamage);
+            }
+        }
+    }
+
+    void ImplosionGrenade()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            RagdollController ragdoll = hit.GetComponentInChildren<RagdollController>();
+
+            if (rb != null && ragdoll != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && grenade.grenadeType == GrenadeType.ImplosionGrenade)
+            {
+                ragdoll.DeactivateGravity();
+                rb.useGravity = false;
+            }
+        }
+    }
+
+    void ImplosionGrenadeEffect()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && grenade.grenadeType == GrenadeType.ImplosionGrenade)
+            {
+                Vector3 offset = rb.transform.position - new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                rb.AddForce(-offset * grenade.impulseForce);
+            }
+
+            Enemy_Health enemy_Health = hit.GetComponent<Enemy_Health>();
+
+            if (enemy_Health != null && grenade.grenadeType == GrenadeType.ImplosionGrenade)
+            {
+                enemy_Health.DecreaseHealth(grenade.grenadeDamage);
+            }
+        }
+    }
+
+    void AntiGravityGrenade()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            RagdollController ragdoll = hit.GetComponentInChildren<RagdollController>();
+
+            if (rb != null && ragdoll != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && grenade.grenadeType == GrenadeType.AntigravityGrenade)
+            {
+                rb.useGravity = false;
+                ragdoll.DeactivateGravity();
+            }
+        }
+    }
+
+    void AntiGravityGrenadeEffect()
+    {
+        Vector3 explosionPosition = gameObject.transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionPosition, grenade.explosionRadius);
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+            if (rb != null && rb.gameObject != this.gameObject && rb.gameObject.tag != "Grenade" && grenade.grenadeType == GrenadeType.AntigravityGrenade)
+            {
+                rb.AddForce(Vector3.up * grenade.impulseForce);
+            }
+            Enemy_Health enemy_Health = hit.GetComponent<Enemy_Health>();
+
+            if (enemy_Health != null && grenade.grenadeType == GrenadeType.AntigravityGrenade)
+            {
+                enemy_Health.DecreaseHealth(grenade.grenadeDamage); //! Implement if you want damage on antigravity
+            }
         }
     }
 
     IEnumerator ExplosionTimer()
     {
-        yield return new WaitForSeconds(fuseTime); //fusetime
-        ExplosionDamage();
+        yield return new WaitForSeconds(grenade.fuseTime); //fusetime
+        if (grenade.grenadeType == GrenadeType.FragGrenade) BitchFragGrenade();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        particleEffect.Play();
-        audioSource.Play();
-        ExplosionBlast();
+        if (grenade.grenadeType == GrenadeType.FragGrenade) Instantiate(grenade.explosionEffect, transform.position, Quaternion.Euler(0, 0, 0));
+        audioSource.PlayOneShot(grenade.explosionSound);
+        if (grenade.grenadeType == GrenadeType.FragGrenade) BitchFragExplosionEffect();
         Destroy(gameObject, 2f);
+    }
+
+    IEnumerator WaitForRagdollPhysics()
+    {
+        yield return new WaitForSeconds(grenade.fuseTime);
+        if (grenade.grenadeType == GrenadeType.ImplosionGrenade) { ImplosionGrenade(); }
+        if (grenade.grenadeType == GrenadeType.AntigravityGrenade) { AntiGravityGrenade(); }
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        if (grenade.grenadeType == GrenadeType.ImplosionGrenade) Instantiate(grenade.explosionEffect, transform.position, Quaternion.Euler(90, 0, 0));
+        if (grenade.grenadeType == GrenadeType.AntigravityGrenade) Instantiate(grenade.explosionEffect, transform.position, Quaternion.Euler(-90, 0, 0));
+        audioSource.PlayOneShot(grenade.explosionSound);
+        if (grenade.grenadeType == GrenadeType.ImplosionGrenade) { InvokeRepeating("ImplosionGrenadeEffect", 0, grenade.implosionPulseTime); }
+        if (grenade.grenadeType == GrenadeType.AntigravityGrenade) { AntiGravityGrenadeEffect(); }
+        Destroy(gameObject, 3f);
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(gameObject.transform.position, explosionRadius);
+        Gizmos.DrawWireSphere(gameObject.transform.position, grenade.explosionRadius);
     }
 }

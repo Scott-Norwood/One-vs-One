@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb552b6d5b1ab94fb5c1e01da347d9a, type: 3}
+  m_Name: Grenade_Implosion
+  m_EditorClassIdentifier: 
+  grenadeType: 2
+  explosionEffect: {fileID: 4686247505073163746, guid: 75f5ad6880835f54a861b2b0b26203a0,
+    type: 3}
+  groundEffect: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: c7799b7ef829d4dc89ef3dcd91d42f42, type: 3}
+  grenadeDamage: 100
+  grenadeForce: 0
+  explosionRadius: 4
+  upwardExplosionForce: 0
+  fuseTime: 1
+  impulseForce: 600
+  implosionPulseTime: 0.1

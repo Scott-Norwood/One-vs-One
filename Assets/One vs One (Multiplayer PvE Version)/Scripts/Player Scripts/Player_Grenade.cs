@@ -40,7 +40,7 @@ public class Player_Grenade : MonoBehaviour
 
     IEnumerator ChargeToToss()
     {
-        grenadeTargetDistance.transform.localScale = originalScale * grenade[grenadeSlotNumber].gameObject.GetComponent<GrenadeExplosion>().explosionRadius;
+        grenadeTargetDistance.transform.localScale = originalScale * grenade[grenadeSlotNumber].gameObject.GetComponent<GrenadeExplosion>().grenade.explosionRadius;
         grenadeTargetDistance.transform.localScale = new Vector3(grenadeTargetDistance.transform.localScale.x, grenadeTargetDistance.transform.localScale.y, grenadeTargetDistance.transform.localScale.z);
         grenadeTargetDistance.transform.Translate(Vector3.right * grenadeTargetMoveSpeed * Time.deltaTime);
         yield return new WaitForSecondsRealtime(.25f);

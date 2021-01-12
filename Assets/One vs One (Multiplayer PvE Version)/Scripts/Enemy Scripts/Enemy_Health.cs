@@ -8,6 +8,8 @@ public class Enemy_Health : System_Health_Core
     System_Currency_Core player_Currency;
     RagdollController ragdollController;
     Enemy_AI enemy;
+    Animator animator;
+    public string enemyName;
 
     void Awake()
     {
@@ -15,7 +17,7 @@ public class Enemy_Health : System_Health_Core
         player_Currency = FindObjectOfType<System_Currency_Core>();
         ragdollController = GetComponentInChildren<RagdollController>();
         enemy = GetComponent<Enemy_AI>();
-
+        animator = GetComponent<Animator>();
     }
 
     bool hasDied = false;
@@ -29,8 +31,10 @@ public class Enemy_Health : System_Health_Core
                 player_Currency.IncreasePoints(enemy_Currency.enemyValue);
                 enemy.enabled = false;
                 ragdollController.ActivateRagdoll();
+                animator.enabled = false;
                 StartCoroutine(WaitToDespawn());
                 hasDied = true;
+                PlayerPrefs.SetString(enemyName, "IsUnlocked");
             }
         }
     }
